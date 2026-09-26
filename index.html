@@ -299,6 +299,20 @@
                 </div>
             </section>
 
+            <section class="csv-sections">
+                <div class="csv-tabs" role="tablist" aria-label="Character Data Tabs">
+                    <button class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-selected="true">Features</button>
+                    <button class="csv-tab-button" data-target="actionsPanel" role="tab" aria-selected="false">Actions</button>
+                    <button class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-selected="false">Inventory</button>
+                    <button class="csv-tab-button" data-target="spellsPanel" role="tab" aria-selected="false">Spells</button>
+                </div>
+
+                <div id="featuresPanel" class="csv-panel active" role="tabpanel"></div>
+                <div id="actionsPanel" class="csv-panel" role="tabpanel" hidden></div>
+                <div id="inventoryPanel" class="csv-panel" role="tabpanel" hidden></div>
+                <div id="spellsPanel" class="csv-panel" role="tabpanel" hidden></div>
+            </section>
+
             <!-- Action Buttons -->
             <section class="actions">
                 <button id="saveBtn" class="btn btn-primary">💾 Save</button>

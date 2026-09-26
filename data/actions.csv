@@ -1,0 +1,38 @@
+,To Hit,Damage  / Efect
+ACTIONS,,
+2x Club,+3,1d4
+2x Silvered Dagger,+5,1d4+2
+2x Unarmed Strike,+3,1
+2x Shillelagh Hit,+7,1d10 +4
+Chill Touch,+7,2d10
+Dash,,Gain an additional full move speed
+Disengage,,Run away w/o opprotunity attacks
+Dodge,,"Any attack roll made against you has Disadvantage if you can see the attacker, and you make Dexterity saving throws with Advantage"
+Grapple,,STR save of 8+STR+PROF(11)
+Help,,Give advantage on attack roll or ability check
+Shove,,STR save of 8+STR+PROF(11) or pushed 5ft or prone
+HIde,,"DC15 Stealth check while you're Heavily Obscured, Three-Quarters Cover or Total Cover, and you must be out of any enemy's line of sight;
+On success you are invisible unless someone Investigate/Percieves higher than your stealth roll, you make an attack or get hit"
+,,
+BONUS ACTIONS,,
+Shillelagh,,Cast the cantrip on a club or quarterstaff
+Hidden Step,0/3,3/LR Turn invis for a turn
+Symbiotic Entity,,"Use wild shape to gain +20 temp HP(4 x lvl), double Halo of Spores dmg, and 1d6 necrotic on melee atttacks. Lasts 10 minutes or until temp HP is gone."
+Wild Shape,,"2/LR change into a beast for 2 hours or hp is lost
+- Retain mind and speech
+- +5 Temp HP
+- Your game statistics are replaced by the Beast's stat block, but you retain your creature type; HP; HP Dice; Int., Wis., and Cha. scores; class features; languages; and feats.
+- You retain your skill and saving throws and use your Proficiency Bonus for them, and gain any proficiencies of the creature
+- You can't cast spells, but shape-shifting doesn't break your Concentration.
+- You can wear your armour if it makes sense, if not, your belongings can be absorbed or dropped."
+,,
+REACTIONS,,
+Halo of Spores,,10ft DC15 CON Save 1d6 necrotic
+Absorb Elements,,
+Opprotunity Attack,,
+,,
+,,
+FREE ACTIONS,,
+Swarm Damage,1/action,+1d6 to attack
+Swarm Push,,DC 15 STR save or pushed 15ft in any horizontal direction
+Swarm Move,,Move 5ft

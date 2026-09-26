@@ -1,0 +1,27 @@
+-1,+2,+3,-1,+4,+1,HP,59(3),"Spell
+Slots",Druid,,,,,,,,Ranger
+SAVE -1,SAVE +5,SAVE +3,Save +2,SAVE +7,SAVE +1,AC,19,1,,,,,,,,,
+8 STR,14 DEX,16 CON,8 INT,18 WIS,12 CHA,INIT,+2,2,,,,,,,,,
+Athletics      0,Acrobatics    +2,,Arcana        -1,Animal Hand   +7,Deception      0,PROF,+3,3,,,,,,,,,
+,SleightHand   +2,,History       -1,Insight       +7,Intimidation   0,SPEED,40(clmb&sm),4,,,,,,,,,
+,Stealth       +5,,Investigation +2,Medicine      +4,Performance    0,Hit Die,x/(4)5 d10,5,,,,,,,,,
+,,,Religion      -1,Nature        +7,Persuasion     0,MAX HP,59,6,,,,,,,,,
+,,,,Perception   +10,,spell save ,15,7,,,,,,,,,
+,,,,Survival      +7,,spellatk,+7,8,,,,,,,,,
+Features,,,,,Profiencies / Languages,,,,,,,,,,,,
+Druidic,"You can use Druidic to leave hidden message, other people can find it w/ DC15 Investigation but cant read unless they know druidic",,,,"Simple, Martial weapons
+Light, Medium and Shields
+Cooks Tools, Herbalism Kit
+Common, Druidic,Elvish, Sylvan
+
+Can talk TO but not hear back from
+any Beasts, Plants or Vegetation.
++ ADV on all CHA Checks w/ them",,,,,,,,,,,,
+Wild Resurgence,You can expend wild shape to gain a lvl 1 spell slot,,,,,,,,AC Calculation,,,,,,,,
+Wild Resurgence,x/1/LR You can expend a spell slot to regain a wild shape,,,,,,,,Breastplate +1,,,,,,,,14
+Hunters Mark,x/3/LR Use the spell w/o Spell Slot,,,,,,,,Dex,,,,,,,,2
+Detect Magic,x/1/LR Use the spell w/o Spell Slot,,,,,,,,Shield,,,,,,,,2
+Disguise Self,x/1/LR Use the spell w/o Spell Slot,,,,,,,,Defense Style,,,,,,,,1
+Hidden Step,x/(Prof Bonus)/LR BA Turn invis until next turn,,,,,,,,,,,,,,,,19
+Wild Shape,x/3 lr,,,,,,,,,,,,,,,,
+Fungal Infestation,3/4 lr (reaction 1hp zombie for 1hr),,,,,,,,,,,,,,,,
