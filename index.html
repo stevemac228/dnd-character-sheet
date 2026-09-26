@@ -301,16 +301,16 @@
 
             <section class="csv-sections">
                 <div class="csv-tabs" role="tablist" aria-label="Character Data Tabs">
-                    <button class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-selected="true">Features</button>
-                    <button class="csv-tab-button" data-target="actionsPanel" role="tab" aria-selected="false">Actions</button>
-                    <button class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-selected="false">Inventory</button>
-                    <button class="csv-tab-button" data-target="spellsPanel" role="tab" aria-selected="false">Spells</button>
+                    <button id="featuresTab" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true">Features</button>
+                    <button id="actionsTab" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false">Actions</button>
+                    <button id="inventoryTab" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false">Inventory</button>
+                    <button id="spellsTab" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false">Spells</button>
                 </div>
 
-                <div id="featuresPanel" class="csv-panel active" role="tabpanel"></div>
-                <div id="actionsPanel" class="csv-panel" role="tabpanel" hidden></div>
-                <div id="inventoryPanel" class="csv-panel" role="tabpanel" hidden></div>
-                <div id="spellsPanel" class="csv-panel" role="tabpanel" hidden></div>
+                <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>
+                <div id="actionsPanel" class="csv-panel" role="tabpanel" aria-labelledby="actionsTab" hidden></div>
+                <div id="inventoryPanel" class="csv-panel" role="tabpanel" aria-labelledby="inventoryTab" hidden></div>
+                <div id="spellsPanel" class="csv-panel" role="tabpanel" aria-labelledby="spellsTab" hidden></div>
             </section>
 
             <!-- Action Buttons -->
