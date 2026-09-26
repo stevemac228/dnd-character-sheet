@@ -69,19 +69,19 @@
                     <h3>Ability Scores</h3>
                     <div class="ability-pair">
                         <div class="ability-col">
-                            <span class="label">-1</span>
+                            <span class="label modifier">-1</span>
                             <button class="btn-ability">SAVE -1</button>
                             <input type="number" class="ability-score" data-ability="str" min="1" max="20" value="10">
                             <span class="ability-name">STR</span>
                         </div>
                         <div class="ability-col">
-                            <span class="label">+2</span>
+                            <span class="label modifier">+2</span>
                             <button class="btn-ability">SAVE +5</button>
                             <input type="number" class="ability-score" data-ability="dex" min="1" max="20" value="10">
                             <span class="ability-name">DEX</span>
                         </div>
                         <div class="ability-col">
-                            <span class="label">+3</span>
+                            <span class="label modifier">+3</span>
                             <button class="btn-ability">SAVE +3</button>
                             <input type="number" class="ability-score" data-ability="con" min="1" max="20" value="10">
                             <span class="ability-name">CON</span>
@@ -89,19 +89,19 @@
                     </div>
                     <div class="ability-pair">
                         <div class="ability-col">
-                            <span class="label">-1</span>
+                            <span class="label modifier">-1</span>
                             <button class="btn-ability">Save +2</button>
                             <input type="number" class="ability-score" data-ability="int" min="1" max="20" value="10">
                             <span class="ability-name">INT</span>
                         </div>
                         <div class="ability-col">
-                            <span class="label">+4</span>
+                            <span class="label modifier">+4</span>
                             <button class="btn-ability">SAVE +7</button>
                             <input type="number" class="ability-score" data-ability="wis" min="1" max="20" value="10">
                             <span class="ability-name">WIS</span>
                         </div>
                         <div class="ability-col">
-                            <span class="label">+1</span>
+                            <span class="label modifier">+1</span>
                             <button class="btn-ability">SAVE +1</button>
                             <input type="number" class="ability-score" data-ability="cha" min="1" max="20" value="10">
                             <span class="ability-name">CHA</span>
@@ -297,6 +297,20 @@
                     </div>
                     <div class="ac-note">AC (Calculation)</div>
                 </div>
+            </section>
+
+            <section class="csv-sections">
+                <div class="csv-tabs" role="tablist" aria-label="Character Data Tabs">
+                    <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true">Features</button>
+                    <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false">Actions</button>
+                    <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false">Inventory</button>
+                    <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false">Spells</button>
+                </div>
+
+                <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>
+                <div id="actionsPanel" class="csv-panel" role="tabpanel" aria-labelledby="actionsTab" hidden></div>
+                <div id="inventoryPanel" class="csv-panel" role="tabpanel" aria-labelledby="inventoryTab" hidden></div>
+                <div id="spellsPanel" class="csv-panel" role="tabpanel" aria-labelledby="spellsTab" hidden></div>
             </section>
 
             <!-- Action Buttons -->

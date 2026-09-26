@@ -383,6 +383,101 @@ header h1 {
     background: #ff5252;
 }
 
+.csv-sections {
+    border: 1px solid #999;
+    background: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.csv-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 1px solid #999;
+    padding: 10px;
+}
+
+.csv-tab-button {
+    padding: 8px 12px;
+    border: 1px solid #999;
+    background: #e8e8e8;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85em;
+}
+
+.csv-tab-button.active {
+    background: #667eea;
+    color: white;
+}
+
+.csv-panel {
+    padding: 10px;
+}
+
+.csv-card {
+    border: 1px solid #ddd;
+    background: white;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.csv-card h4 {
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.csv-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.csv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82em;
+}
+
+.csv-table th,
+.csv-table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.csv-table th {
+    background: #f0f0f0;
+}
+
+.multiline {
+    white-space: pre-line;
+}
+
+.inventory-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.inventory-controls input,
+.inventory-controls select {
+    padding: 6px;
+    border: 1px solid #999;
+}
+
+.spell-group {
+    margin-bottom: 14px;
+}
+
+.spell-group h4 {
+    margin-bottom: 6px;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .sheet-grid {
@@ -404,6 +499,10 @@ header h1 {
     }
     
     .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    .csv-grid-two {
         grid-template-columns: 1fr;
     }
 }
