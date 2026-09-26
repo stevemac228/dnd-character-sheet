@@ -45,7 +45,7 @@ class CharacterSheet {
         abilityMappings.forEach(([shortName, fullName]) => {
             const input = document.querySelector(`[data-ability="${shortName}"]`) || document.querySelector(`[data-ability="${fullName}"]`);
             if (!input) return;
-            const modifier = input.parentElement.querySelector('.modifier, .label');
+            const modifier = input.parentElement.querySelector('.modifier');
             const score = parseInt(input.value);
             const mod = Math.floor((score - 10) / 2);
             const modSign = mod >= 0 ? '+' : '';
@@ -237,6 +237,11 @@ class CharacterSheet {
         let proficiencies = '';
         const acBreakdown = [];
         let acTotal = '';
+
+        if (featureStart === -1) {
+            panel.innerHTML = '<div class="csv-card">Features data not found in CSV.</div>';
+            return;
+        }
 
         rows.slice(featureStart + 1).forEach(row => {
             if (row[0]) features.push({ name: row[0], description: row[1] || '' });
