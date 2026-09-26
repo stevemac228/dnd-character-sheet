@@ -54,16 +54,6 @@ class CharacterSheet {
             }
         });
 
-        // Update initiative bonus
-        const dexInput = document.querySelector('[data-ability="dex"]') || document.querySelector('[data-ability="dexterity"]');
-        if (!dexInput) return;
-        const dexScore = parseInt(dexInput.value);
-        const dexMod = Math.floor((dexScore - 10) / 2);
-        const initiativeBonus = document.getElementById('initiativeBonus');
-        if (initiativeBonus) {
-            const initiativeBonusSign = dexMod >= 0 ? '+' : '';
-            initiativeBonus.textContent = `${initiativeBonusSign}${dexMod}`;
-        }
     }
 
     async initializeCsvSections() {
