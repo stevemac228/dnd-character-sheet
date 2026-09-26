@@ -389,21 +389,38 @@ header h1 {
     margin-bottom: 20px;
 }
 
-.csv-tabs {
+.csv-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 640px;
+}
+
+.csv-sidebar {
+    border-right: 1px solid #999;
+    padding: 12px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    border-bottom: 1px solid #999;
-    padding: 10px;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .csv-tab-button {
-    padding: 8px 12px;
+    width: 100%;
+    padding: 10px 12px;
     border: 1px solid #999;
-    background: #e8e8e8;
+    background: white;
     cursor: pointer;
     font-weight: bold;
-    font-size: 0.85em;
+    font-size: 0.9em;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-icon {
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
 }
 
 .csv-tab-button.active {
@@ -411,8 +428,12 @@ header h1 {
     color: white;
 }
 
+.csv-content {
+    padding: 12px;
+}
+
 .csv-panel {
-    padding: 10px;
+    min-height: 100%;
 }
 
 .csv-card {
@@ -478,31 +499,55 @@ header h1 {
     margin-bottom: 6px;
 }
 
+.top-info input[readonly] {
+    background: #ececec;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+.editable-cell {
+    min-width: 140px;
+    background: #fffef4;
+}
+
+.editable-cell:focus {
+    outline: 2px solid #667eea;
+    outline-offset: -2px;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
-    .sheet-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    
     .top-info {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .csv-layout {
+        grid-template-columns: 200px 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .sheet-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .top-info {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .bottom-section {
-        grid-template-columns: 1fr;
     }
 
     .csv-grid-two {
         grid-template-columns: 1fr;
+    }
+
+    .csv-layout {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .csv-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid #999;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .csv-tab-button {
+        flex: 1 1 calc(50% - 8px);
     }
 }

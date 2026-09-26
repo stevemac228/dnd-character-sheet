@@ -297,148 +297,74 @@ class CharacterSheet {
 
     renderActionsPanel(rows) {
         const panel = document.getElementById('actionsPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const groups = {};
-        let currentGroup = '';
-        rows.slice(1).forEach(row => {
-            const name = (row[0] || '').trim();
-            const toHit = row[1] || '';
-            const effect = row[2] || '';
-            if (!name && !toHit && !effect) return;
-            if (name === name.toUpperCase() && !toHit && !effect) {
-                currentGroup = name;
-                groups[currentGroup] = [];
-                return;
-            }
-            if (currentGroup && name) {
-                groups[currentGroup].push({ name, toHit, effect });
-            }
-        });
+        const columnCount = Math.max(...rows.map(row => row.length), 1);
+        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
+        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
 
-        panel.innerHTML = Object.entries(groups).map(([groupName, entries]) => `
+        panel.innerHTML = `
             <div class="csv-card">
-                <h4>${this.escapeHtml(groupName)}</h4>
+                <h4>Actions CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr><th>Name</th><th>To Hit</th><th>Damage / Effect</th></tr></thead>
-                    <tbody>${entries.map(entry => `<tr><td>${this.escapeHtml(entry.name)}</td><td>${this.escapeHtml(entry.toHit)}</td><td class="multiline">${this.escapeHtml(entry.effect)}</td></tr>`).join('')}</tbody>
+                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
             </div>
-        `).join('');
+        `;
     }
 
     renderInventoryPanel(rows) {
         const panel = document.getElementById('inventoryPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const headers = rows[0];
-        const data = rows.slice(1).map(row => {
-            const item = {};
-            headers.forEach((header, index) => {
-                item[header] = row[index] || '';
-            });
-            return item;
-        });
-
+        const columnCount = Math.max(...rows.map(row => row.length), 1);
+        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
+        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
         panel.innerHTML = `
             <div class="inventory-controls">
-                <input type="text" id="inventoryFilter" placeholder="Filter inventory...">
-                <select id="inventorySort">
-                    ${headers.map(header => `<option value="${this.escapeHtml(header)}">${this.escapeHtml(header)}</option>`).join('')}
-                </select>
-                <select id="inventoryDirection">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
+                <button id="inventoryAddRow" type="button" class="btn btn-secondary">Add Row</button>
             </div>
-            <div id="inventoryTableWrap"></div>
-        `;
-
-        const filterInput = panel.querySelector('#inventoryFilter');
-        const sortSelect = panel.querySelector('#inventorySort');
-        const directionSelect = panel.querySelector('#inventoryDirection');
-        const tableWrap = panel.querySelector('#inventoryTableWrap');
-
-        const drawTable = () => {
-            const filter = filterInput.value.trim().toLowerCase();
-            const sortBy = sortSelect.value;
-            const direction = directionSelect.value;
-
-            const filtered = data.filter(row =>
-                Object.values(row).join(' ').toLowerCase().includes(filter)
-            );
-            filtered.sort((a, b) => {
-                const left = (a[sortBy] || '').toString().toLowerCase();
-                const right = (b[sortBy] || '').toString().toLowerCase();
-                if (left < right) return direction === 'asc' ? -1 : 1;
-                if (left > right) return direction === 'asc' ? 1 : -1;
-                return 0;
-            });
-
-            tableWrap.innerHTML = `
+            <div id="inventoryTableWrap">
                 <table class="csv-table">
                     <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
-                    <tbody>${filtered.map(row => `<tr>${headers.map(header => `<td class="multiline">${this.escapeHtml(row[header] || '')}</td>`).join('')}</tr>`).join('')}</tbody>
+                    <tbody>
+                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline editable-cell" contenteditable="true">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
-            `;
-        };
+            </div>
+        `;
 
-        filterInput.addEventListener('input', drawTable);
-        sortSelect.addEventListener('change', drawTable);
-        directionSelect.addEventListener('change', drawTable);
-        drawTable();
+        const addRowButton = panel.querySelector('#inventoryAddRow');
+        const tableWrap = panel.querySelector('#inventoryTableWrap');
+
+        addRowButton?.addEventListener('click', () => {
+            const emptyRow = `<tr>${headers.map(() => '<td class="multiline editable-cell" contenteditable="true"></td>').join('')}</tr>`;
+            tableWrap.querySelector('tbody')?.insertAdjacentHTML('beforeend', emptyRow);
+        });
     }
 
     renderSpellsPanel(rows) {
         const panel = document.getElementById('spellsPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const groups = [];
-        let currentGroup = { title: 'Spells', spells: [] };
+        const columnCount = Math.max(...rows.map(row => row.length), 1);
+        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
+        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
 
-        rows.slice(1).forEach(row => {
-            const cells = [...row, '', '', '', '', '', '', '', '', '', '', ''];
-            const name = (cells[0] || '').trim();
-            const time = cells[1] || '';
-            const range = cells[5] || '';
-            const vsm = cells[9] || '';
-            const duration = cells[10] || '';
-            const description = cells[11] || '';
-
-            const rest = cells.slice(1, 12).some(value => (value || '').trim() !== '');
-            if (!name && !rest) return;
-
-            if (name && !rest) {
-                if (currentGroup.spells.length || currentGroup.title !== 'Spells') {
-                    groups.push(currentGroup);
-                }
-                currentGroup = { title: name, spells: [] };
-                return;
-            }
-
-            currentGroup.spells.push({ name, time, range, vsm, duration, description });
-        });
-
-        if (currentGroup.spells.length || currentGroup.title !== 'Spells') {
-            groups.push(currentGroup);
-        }
-
-        panel.innerHTML = groups.map(group => `
-            <div class="spell-group csv-card">
-                <h4>${this.escapeHtml(group.title)}</h4>
+        panel.innerHTML = `
+            <div class="csv-card">
+                <h4>Spells CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr><th>Name</th><th>Time</th><th>Range</th><th>VSM</th><th>Duration</th><th>Description</th></tr></thead>
-                    <tbody>${group.spells.map(spell => `<tr>
-                        <td>${this.escapeHtml(spell.name)}</td>
-                        <td>${this.escapeHtml(spell.time)}</td>
-                        <td>${this.escapeHtml(spell.range)}</td>
-                        <td>${this.escapeHtml(spell.vsm)}</td>
-                        <td>${this.escapeHtml(spell.duration)}</td>
-                        <td class="multiline">${this.escapeHtml(spell.description)}</td>
-                    </tr>`).join('')}</tbody>
+                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
             </div>
-        `).join('');
+        `;
     }
 
     getCharacterData() {
