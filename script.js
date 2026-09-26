@@ -181,18 +181,9 @@ class CharacterSheet {
         return rows;
     }
 
-    extractTabularData(rows) {
+    extractTabularData(rows, hasHeader = false) {
         const columnCount = Math.max(...rows.map(row => row.length), 1);
         const firstRow = rows[0] || [];
-        const hasHeader = firstRow.some((cell, index) => {
-            const headerValue = (cell || '').trim();
-            if (!headerValue) return false;
-            return rows.slice(1).some(row => {
-                const value = (row[index] || '').trim();
-                return value !== '' && value !== headerValue;
-            });
-        });
-
         const headers = hasHeader
             ? Array.from({ length: columnCount }, (_, index) => firstRow[index] || `Column ${index + 1}`)
             : Array.from({ length: columnCount }, (_, index) => `Column ${index + 1}`);
@@ -322,7 +313,7 @@ class CharacterSheet {
         const panel = document.getElementById('actionsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows);
+        const { headers, dataRows } = this.extractTabularData(rows, false);
 
         panel.innerHTML = `
             <div class="csv-card">
@@ -341,35 +332,90 @@ class CharacterSheet {
         const panel = document.getElementById('inventoryPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows);
+        const { headers, dataRows } = this.extractTabularData(rows, true);
+        const data = dataRows.map(row => {
+            const item = {};
+            headers.forEach((header, index) => {
+                item[header] = row[index] || '';
+            });
+            return item;
+        });
         panel.innerHTML = `
             <div class="inventory-controls">
+                <input type="text" id="inventoryFilter" placeholder="Filter inventory...">
+                <select id="inventorySort">
+                    ${headers.map(header => `<option value="${this.escapeHtml(header)}">${this.escapeHtml(header)}</option>`).join('')}
+                </select>
+                <select id="inventoryDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
                 <button id="inventoryAddRow" type="button" class="btn btn-secondary">Add Row</button>
             </div>
-            <div id="inventoryTableWrap">
-                <table class="csv-table">
-                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
-                    <tbody>
-                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline editable-cell" contenteditable="true">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
-                    </tbody>
-                </table>
-            </div>
+            <div id="inventoryTableWrap"></div>
         `;
 
+        const filterInput = panel.querySelector('#inventoryFilter');
+        const sortSelect = panel.querySelector('#inventorySort');
+        const directionSelect = panel.querySelector('#inventoryDirection');
         const addRowButton = panel.querySelector('#inventoryAddRow');
         const tableWrap = panel.querySelector('#inventoryTableWrap');
 
+        const drawTable = () => {
+            const filter = filterInput.value.trim().toLowerCase();
+            const sortBy = sortSelect.value;
+            const direction = directionSelect.value;
+
+            const indexedRows = data
+                .map((row, index) => ({ row, index }))
+                .filter(({ row }) => Object.values(row).join(' ').toLowerCase().includes(filter));
+
+            indexedRows.sort((left, right) => {
+                const leftValue = (left.row[sortBy] || '').toString().toLowerCase();
+                const rightValue = (right.row[sortBy] || '').toString().toLowerCase();
+                if (leftValue < rightValue) return direction === 'asc' ? -1 : 1;
+                if (leftValue > rightValue) return direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            tableWrap.innerHTML = `
+                <table class="csv-table">
+                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${indexedRows.map(({ row, index }) => `<tr>${headers.map(header => `<td class="multiline editable-cell" contenteditable="true" data-row-index="${index}" data-header="${this.escapeHtml(header)}">${this.escapeHtml(row[header] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            tableWrap.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.addEventListener('input', () => {
+                    const rowIndex = Number(cell.dataset.rowIndex);
+                    const header = cell.dataset.header;
+                    if (Number.isNaN(rowIndex) || !header) return;
+                    data[rowIndex][header] = cell.textContent || '';
+                });
+            });
+        };
+
+        filterInput.addEventListener('input', drawTable);
+        sortSelect.addEventListener('change', drawTable);
+        directionSelect.addEventListener('change', drawTable);
         addRowButton?.addEventListener('click', () => {
-            const emptyRow = `<tr>${headers.map(() => '<td class="multiline editable-cell" contenteditable="true"></td>').join('')}</tr>`;
-            tableWrap.querySelector('tbody')?.insertAdjacentHTML('beforeend', emptyRow);
+            const newRow = {};
+            headers.forEach(header => {
+                newRow[header] = '';
+            });
+            data.push(newRow);
+            drawTable();
         });
+        drawTable();
     }
 
     renderSpellsPanel(rows) {
         const panel = document.getElementById('spellsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows);
+        const { headers, dataRows } = this.extractTabularData(rows, false);
 
         panel.innerHTML = `
             <div class="csv-card">
