@@ -107,6 +107,10 @@ class CharacterSheet {
                     nextIndex = (currentIndex + 1) % buttons.length;
                 } else if (event.key === 'ArrowLeft') {
                     nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                } else if (event.key === 'ArrowDown') {
+                    nextIndex = (currentIndex + 1) % buttons.length;
+                } else if (event.key === 'ArrowUp') {
+                    nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
                 } else if (event.key === 'Home') {
                     nextIndex = 0;
                 } else if (event.key === 'End') {
@@ -177,6 +181,17 @@ class CharacterSheet {
         return rows;
     }
 
+    extractTabularData(rows, hasHeader = false) {
+        const columnCount = Math.max(...rows.map(row => row.length), 1);
+        const firstRow = rows[0] || [];
+        const columns = Array.from({ length: columnCount }, (_, index) => ({
+            key: `col_${index}`,
+            label: hasHeader ? (firstRow[index] || `Column ${index + 1}`) : `Column ${index + 1}`
+        }));
+        const dataRows = (hasHeader ? rows.slice(1) : rows).filter(row => row.some(cell => (cell || '').trim() !== ''));
+        return { columns, dataRows };
+    }
+
     escapeHtml(value = '') {
         return value
             .replaceAll('&', '&amp;')
@@ -184,6 +199,23 @@ class CharacterSheet {
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;')
             .replaceAll("'", '&#39;');
+    }
+
+    insertPlainTextAtSelection(target, text) {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0) {
+            target.textContent = `${target.textContent || ''}${text}`;
+            return;
+        }
+
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const textNode = document.createTextNode(text);
+        range.insertNode(textNode);
+        range.setStartAfter(textNode);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
     }
 
     renderFeaturesPanel(rows) {
@@ -297,59 +329,46 @@ class CharacterSheet {
 
     renderActionsPanel(rows) {
         const panel = document.getElementById('actionsPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const groups = {};
-        let currentGroup = '';
-        rows.slice(1).forEach(row => {
-            const name = (row[0] || '').trim();
-            const toHit = row[1] || '';
-            const effect = row[2] || '';
-            if (!name && !toHit && !effect) return;
-            if (name === name.toUpperCase() && !toHit && !effect) {
-                currentGroup = name;
-                groups[currentGroup] = [];
-                return;
-            }
-            if (currentGroup && name) {
-                groups[currentGroup].push({ name, toHit, effect });
-            }
-        });
+        const { columns, dataRows } = this.extractTabularData(rows, true);
 
-        panel.innerHTML = Object.entries(groups).map(([groupName, entries]) => `
+        panel.innerHTML = `
             <div class="csv-card">
-                <h4>${this.escapeHtml(groupName)}</h4>
+                <h4>Actions CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr><th>Name</th><th>To Hit</th><th>Damage / Effect</th></tr></thead>
-                    <tbody>${entries.map(entry => `<tr><td>${this.escapeHtml(entry.name)}</td><td>${this.escapeHtml(entry.toHit)}</td><td class="multiline">${this.escapeHtml(entry.effect)}</td></tr>`).join('')}</tbody>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${dataRows.map(row => `<tr>${columns.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
             </div>
-        `).join('');
+        `;
     }
 
     renderInventoryPanel(rows) {
         const panel = document.getElementById('inventoryPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const headers = rows[0];
-        const data = rows.slice(1).map(row => {
+        const { columns, dataRows } = this.extractTabularData(rows, true);
+        const data = dataRows.map(row => {
             const item = {};
-            headers.forEach((header, index) => {
-                item[header] = row[index] || '';
+            columns.forEach((column, index) => {
+                item[column.key] = row[index] || '';
             });
             return item;
         });
-
         panel.innerHTML = `
             <div class="inventory-controls">
                 <input type="text" id="inventoryFilter" placeholder="Filter inventory...">
                 <select id="inventorySort">
-                    ${headers.map(header => `<option value="${this.escapeHtml(header)}">${this.escapeHtml(header)}</option>`).join('')}
+                    ${columns.map(column => `<option value="${this.escapeHtml(column.key)}">${this.escapeHtml(column.label)}</option>`).join('')}
                 </select>
                 <select id="inventoryDirection">
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
+                <button id="inventoryAddRow" type="button" class="btn btn-secondary">Add Row</button>
             </div>
             <div id="inventoryTableWrap"></div>
         `;
@@ -357,6 +376,7 @@ class CharacterSheet {
         const filterInput = panel.querySelector('#inventoryFilter');
         const sortSelect = panel.querySelector('#inventorySort');
         const directionSelect = panel.querySelector('#inventoryDirection');
+        const addRowButton = panel.querySelector('#inventoryAddRow');
         const tableWrap = panel.querySelector('#inventoryTableWrap');
 
         const drawTable = () => {
@@ -364,81 +384,73 @@ class CharacterSheet {
             const sortBy = sortSelect.value;
             const direction = directionSelect.value;
 
-            const filtered = data.filter(row =>
-                Object.values(row).join(' ').toLowerCase().includes(filter)
-            );
-            filtered.sort((a, b) => {
-                const left = (a[sortBy] || '').toString().toLowerCase();
-                const right = (b[sortBy] || '').toString().toLowerCase();
-                if (left < right) return direction === 'asc' ? -1 : 1;
-                if (left > right) return direction === 'asc' ? 1 : -1;
+            const indexedRows = data
+                .map((row, index) => ({ row, index }))
+                .filter(({ row }) => columns.map(column => row[column.key] || '').join(' ').toLowerCase().includes(filter));
+
+            indexedRows.sort((left, right) => {
+                const leftValue = (left.row[sortBy] || '').toString().toLowerCase();
+                const rightValue = (right.row[sortBy] || '').toString().toLowerCase();
+                if (leftValue < rightValue) return direction === 'asc' ? -1 : 1;
+                if (leftValue > rightValue) return direction === 'asc' ? 1 : -1;
                 return 0;
             });
 
             tableWrap.innerHTML = `
                 <table class="csv-table">
-                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
-                    <tbody>${filtered.map(row => `<tr>${headers.map(header => `<td class="multiline">${this.escapeHtml(row[header] || '')}</td>`).join('')}</tr>`).join('')}</tbody>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${indexedRows.map(({ row, index }) => `<tr>${columns.map(column => `<td class="multiline editable-cell" contenteditable="true" data-row-index="${index}" data-column-key="${this.escapeHtml(column.key)}">${this.escapeHtml(row[column.key] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
             `;
+
+            tableWrap.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.addEventListener('paste', (event) => {
+                    event.preventDefault();
+                    const plainText = event.clipboardData?.getData('text/plain') || '';
+                    this.insertPlainTextAtSelection(cell, plainText);
+                });
+                cell.addEventListener('input', () => {
+                    const rowIndex = Number(cell.dataset.rowIndex);
+                    const columnKey = cell.dataset.columnKey;
+                    if (Number.isNaN(rowIndex) || !columnKey) return;
+                    data[rowIndex][columnKey] = cell.textContent || '';
+                });
+            });
         };
 
         filterInput.addEventListener('input', drawTable);
         sortSelect.addEventListener('change', drawTable);
         directionSelect.addEventListener('change', drawTable);
+        addRowButton?.addEventListener('click', () => {
+            const newRow = {};
+            columns.forEach(column => {
+                newRow[column.key] = '';
+            });
+            data.push(newRow);
+            drawTable();
+        });
         drawTable();
     }
 
     renderSpellsPanel(rows) {
         const panel = document.getElementById('spellsPanel');
-        if (!panel || rows.length < 2) return;
+        if (!panel || !rows.length) return;
 
-        const groups = [];
-        let currentGroup = { title: 'Spells', spells: [] };
+        const { columns, dataRows } = this.extractTabularData(rows, true);
 
-        rows.slice(1).forEach(row => {
-            const cells = [...row, '', '', '', '', '', '', '', '', '', '', ''];
-            const name = (cells[0] || '').trim();
-            const time = cells[1] || '';
-            const range = cells[5] || '';
-            const vsm = cells[9] || '';
-            const duration = cells[10] || '';
-            const description = cells[11] || '';
-
-            const rest = cells.slice(1, 12).some(value => (value || '').trim() !== '');
-            if (!name && !rest) return;
-
-            if (name && !rest) {
-                if (currentGroup.spells.length || currentGroup.title !== 'Spells') {
-                    groups.push(currentGroup);
-                }
-                currentGroup = { title: name, spells: [] };
-                return;
-            }
-
-            currentGroup.spells.push({ name, time, range, vsm, duration, description });
-        });
-
-        if (currentGroup.spells.length || currentGroup.title !== 'Spells') {
-            groups.push(currentGroup);
-        }
-
-        panel.innerHTML = groups.map(group => `
-            <div class="spell-group csv-card">
-                <h4>${this.escapeHtml(group.title)}</h4>
+        panel.innerHTML = `
+            <div class="csv-card">
+                <h4>Spells CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr><th>Name</th><th>Time</th><th>Range</th><th>VSM</th><th>Duration</th><th>Description</th></tr></thead>
-                    <tbody>${group.spells.map(spell => `<tr>
-                        <td>${this.escapeHtml(spell.name)}</td>
-                        <td>${this.escapeHtml(spell.time)}</td>
-                        <td>${this.escapeHtml(spell.range)}</td>
-                        <td>${this.escapeHtml(spell.vsm)}</td>
-                        <td>${this.escapeHtml(spell.duration)}</td>
-                        <td class="multiline">${this.escapeHtml(spell.description)}</td>
-                    </tr>`).join('')}</tbody>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${dataRows.map(row => `<tr>${columns.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                    </tbody>
                 </table>
             </div>
-        `).join('');
+        `;
     }
 
     getCharacterData() {

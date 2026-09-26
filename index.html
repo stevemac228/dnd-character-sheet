@@ -13,44 +13,18 @@
         </header>
 
         <main>
-            <!-- Top Info Bar -->
             <section class="top-info">
                 <div class="info-box">
                     <label>Character Name</label>
-                    <input type="text" id="charName" placeholder="Name">
+                    <input type="text" id="charName" value="Moss" readonly>
                 </div>
                 <div class="info-box">
                     <label>Class</label>
-                    <select id="class">
-                        <option value="">Select</option>
-                        <option value="Barbarian">Barbarian</option>
-                        <option value="Bard">Bard</option>
-                        <option value="Cleric">Cleric</option>
-                        <option value="Druid">Druid</option>
-                        <option value="Fighter">Fighter</option>
-                        <option value="Monk">Monk</option>
-                        <option value="Paladin">Paladin</option>
-                        <option value="Ranger">Ranger</option>
-                        <option value="Rogue">Rogue</option>
-                        <option value="Sorcerer">Sorcerer</option>
-                        <option value="Warlock">Warlock</option>
-                        <option value="Wizard">Wizard</option>
-                    </select>
+                    <input type="text" id="class" value="Druid/Ranger" readonly>
                 </div>
                 <div class="info-box">
                     <label>Race</label>
-                    <select id="race">
-                        <option value="">Select</option>
-                        <option value="Dwarf">Dwarf</option>
-                        <option value="Elf">Elf</option>
-                        <option value="Halfling">Halfling</option>
-                        <option value="Human">Human</option>
-                        <option value="Dragonborn">Dragonborn</option>
-                        <option value="Gnome">Gnome</option>
-                        <option value="Half-Elf">Half-Elf</option>
-                        <option value="Half-Orc">Half-Orc</option>
-                        <option value="Tiefling">Tiefling</option>
-                    </select>
+                    <input type="text" id="race" value="Firbolg" readonly>
                 </div>
                 <div class="info-box">
                     <label>Level</label>
@@ -62,255 +36,34 @@
                 </div>
             </section>
 
-            <!-- Main Sheet Grid -->
-            <div class="sheet-grid">
-                <!-- Left Column: Ability Scores -->
-                <section class="ability-scores">
-                    <h3>Ability Scores</h3>
-                    <div class="ability-pair">
-                        <div class="ability-col">
-                            <span class="label modifier">-1</span>
-                            <button class="btn-ability">SAVE -1</button>
-                            <input type="number" class="ability-score" data-ability="str" min="1" max="20" value="10">
-                            <span class="ability-name">STR</span>
-                        </div>
-                        <div class="ability-col">
-                            <span class="label modifier">+2</span>
-                            <button class="btn-ability">SAVE +5</button>
-                            <input type="number" class="ability-score" data-ability="dex" min="1" max="20" value="10">
-                            <span class="ability-name">DEX</span>
-                        </div>
-                        <div class="ability-col">
-                            <span class="label modifier">+3</span>
-                            <button class="btn-ability">SAVE +3</button>
-                            <input type="number" class="ability-score" data-ability="con" min="1" max="20" value="10">
-                            <span class="ability-name">CON</span>
-                        </div>
-                    </div>
-                    <div class="ability-pair">
-                        <div class="ability-col">
-                            <span class="label modifier">-1</span>
-                            <button class="btn-ability">Save +2</button>
-                            <input type="number" class="ability-score" data-ability="int" min="1" max="20" value="10">
-                            <span class="ability-name">INT</span>
-                        </div>
-                        <div class="ability-col">
-                            <span class="label modifier">+4</span>
-                            <button class="btn-ability">SAVE +7</button>
-                            <input type="number" class="ability-score" data-ability="wis" min="1" max="20" value="10">
-                            <span class="ability-name">WIS</span>
-                        </div>
-                        <div class="ability-col">
-                            <span class="label modifier">+1</span>
-                            <button class="btn-ability">SAVE +1</button>
-                            <input type="number" class="ability-score" data-ability="cha" min="1" max="20" value="10">
-                            <span class="ability-name">CHA</span>
-                        </div>
-                    </div>
-
-                    <!-- Skills Section -->
-                    <h3 style="margin-top: 20px;">Skills</h3>
-                    <div class="skills-two-col">
-                        <div class="skill-item">
-                            <span>Athletics</span>
-                            <input type="number" class="skill-mod" value="0" min="-10" max="10">
-                        </div>
-                        <div class="skill-item">
-                            <span>Acrobatics</span>
-                            <input type="number" class="skill-mod" value="2" min="-10" max="10">
-                        </div>
-                        <div class="skill-item">
-                            <span>Sleight of Hand</span>
-                            <input type="number" class="skill-mod" value="2" min="-10" max="10">
-                        </div>
-                        <div class="skill-item">
-                            <span>Stealth</span>
-                            <input type="number" class="skill-mod" value="5" min="-10" max="10">
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Middle Column: Spells & Combat -->
-                <section class="middle-column">
-                    <!-- Spells Grid -->
-                    <div class="spell-header">
-                        <span class="spell-name">Arcana</span>
-                        <span class="spell-mod">-1</span>
-                        <span class="spell-name">Animal Hand</span>
-                        <span class="spell-mod">+7</span>
-                        <span class="spell-name">Deception</span>
-                        <span class="spell-mod">0</span>
-                    </div>
-                    <div class="spell-header">
-                        <span class="spell-name">History</span>
-                        <span class="spell-mod">-1</span>
-                        <span class="spell-name">Insight</span>
-                        <span class="spell-mod">+7</span>
-                        <span class="spell-name">Intimidation</span>
-                        <span class="spell-mod">0</span>
-                    </div>
-                    <div class="spell-header">
-                        <span class="spell-name">Investigation</span>
-                        <span class="spell-mod">+2</span>
-                        <span class="spell-name">Medicine</span>
-                        <span class="spell-mod">+4</span>
-                        <span class="spell-name">Performance</span>
-                        <span class="spell-mod">0</span>
-                    </div>
-                    <div class="spell-header">
-                        <span style="grid-column: 1 / 3;"></span>
-                        <span class="spell-name">Perception</span>
-                        <span class="spell-mod">+10</span>
-                    </div>
-                    <div class="spell-header">
-                        <span style="grid-column: 1 / 3;"></span>
-                        <span class="spell-name">Survival</span>
-                        <span class="spell-mod">+7</span>
-                    </div>
-
-                    <!-- Combat Stats -->
-                    <h3 style="margin-top: 20px;">Combat</h3>
-                    <div class="combat-stats">
-                        <div class="stat">
-                            <label>HP</label>
-                            <div class="hp-display">59(3)</div>
-                        </div>
-                        <div class="stat">
-                            <label>AC</label>
-                            <input type="number" id="ac" value="19">
-                        </div>
-                        <div class="stat">
-                            <label>INIT</label>
-                            <input type="number" id="initiative" value="2">
-                        </div>
-                        <div class="stat">
-                            <label>PROF</label>
-                            <input type="number" id="prof" value="3">
-                        </div>
-                        <div class="stat">
-                            <label>SPEED</label>
-                            <input type="text" id="speed" value="40(climbsm)">
-                        </div>
-                        <div class="stat">
-                            <label>Hit Die</label>
-                            <input type="text" id="hitdie" value="x/(4)5 d10">
-                        </div>
-                    </div>
-
-                    <!-- Max HP & Spell -->
-                    <div class="stat-row">
-                        <div class="stat">
-                            <label>MAX HP</label>
-                            <input type="number" id="maxhp" value="59">
-                        </div>
-                        <div class="stat">
-                            <label>spell save</label>
-                            <input type="number" id="spellsave" value="15">
-                        </div>
-                        <div class="stat">
-                            <label>spellAtk</label>
-                            <input type="number" id="spellat" value="7">
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Right Column: Features & Spells -->
-                <section class="right-column">
-                    <h3>Features</h3>
-                    <div class="features-list">
-                        <div class="feature">
-                            <label>Druidic</label>
-                            <span>You can use Druidic to leave hidden message, other people can find it w/ DIS Investigation but can't read unless they know druidic</span>
-                        </div>
-                        <div class="feature">
-                            <label>Wild Resurgence</label>
-                            <span>You can spend wild shape to gain a 1v1 1 spell slot</span>
-                        </div>
-                        <div class="feature">
-                            <label>Wild Resurgence</label>
-                            <span>x/1LR You can spend a spell 1LR to regain a wild shape</span>
-                        </div>
-                        <div class="feature">
-                            <label>Hunters Mark</label>
-                            <span>x/3LR Use the spell w/o Spell Slot</span>
-                        </div>
-                        <div class="feature">
-                            <label>Detect Magic</label>
-                            <span>x/1LR Use the spell w/o Spell Slot</span>
-                        </div>
-                        <div class="feature">
-                            <label>Disguise Self</label>
-                            <span>x/ Use the spell w/o Spell Slot</span>
-                        </div>
-                        <div class="feature">
-                            <label>Hidden Step</label>
-                            <span>x/(Prof Bonus)/LR BA Turn invis until next turn</span>
-                        </div>
-                    </div>
-
-                    <h3 style="margin-top: 20px;">Spells</h3>
-                    <div class="spells-box">
-                        <textarea id="spells" placeholder="List your spells here...&#10;&#10;Cantrips:&#10;Spell 1:&#10;Spell 2:"></textarea>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Proficiencies & Equipment -->
-            <section class="bottom-section">
-                <div class="proficiencies">
-                    <h3>Proficiencies / Languages</h3>
-                    <div class="prof-list">
-                        <div class="prof-item">
-                            <span>Simple, Martial weapons</span>
-                        </div>
-                        <div class="prof-item">
-                            <span>Light, Medium and Shields</span>
-                        </div>
-                        <div class="prof-item">
-                            <span>Cooks Tools, Herbalism Kit</span>
-                        </div>
-                        <div class="prof-item">
-                            <span>Common, Druidic, Elvish</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="equipment">
-                    <h3>Equipment</h3>
-                    <div class="equipment-list">
-                        <div class="equip-item">
-                            <span>Breastplate +1</span>
-                            <span class="value">14</span>
-                        </div>
-                        <div class="equip-item">
-                            <span>Dex</span>
-                            <span class="value">2</span>
-                        </div>
-                        <div class="equip-item">
-                            <span>Shield</span>
-                            <span class="value">2</span>
-                        </div>
-                        <div class="equip-item">
-                            <span>Defense Style</span>
-                            <span class="value">1</span>
-                        </div>
-                    </div>
-                    <div class="ac-note">AC (Calculation)</div>
-                </div>
-            </section>
-
             <section class="csv-sections">
-                <div class="csv-tabs" role="tablist" aria-label="Character Data Tabs">
-                    <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true">Features</button>
-                    <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false">Actions</button>
-                    <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false">Inventory</button>
-                    <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false">Spells</button>
-                </div>
+                <div class="csv-layout">
+                    <nav class="csv-sidebar" role="tablist" aria-label="Character Pages">
+                        <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true" tabindex="0">
+                            <span class="tab-icon" aria-hidden="true">F</span>
+                            <span class="tab-label">Features & Abilities</span>
+                        </button>
+                        <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false" tabindex="-1">
+                            <span class="tab-icon" aria-hidden="true">A</span>
+                            <span class="tab-label">Actions</span>
+                        </button>
+                        <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false" tabindex="-1">
+                            <span class="tab-icon" aria-hidden="true">S</span>
+                            <span class="tab-label">Spells</span>
+                        </button>
+                        <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false" tabindex="-1">
+                            <span class="tab-icon" aria-hidden="true">I</span>
+                            <span class="tab-label">Inventory</span>
+                        </button>
+                    </nav>
 
-                <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>
-                <div id="actionsPanel" class="csv-panel" role="tabpanel" aria-labelledby="actionsTab" hidden></div>
-                <div id="inventoryPanel" class="csv-panel" role="tabpanel" aria-labelledby="inventoryTab" hidden></div>
-                <div id="spellsPanel" class="csv-panel" role="tabpanel" aria-labelledby="spellsTab" hidden></div>
+                    <div class="csv-content">
+                        <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>
+                        <div id="actionsPanel" class="csv-panel" role="tabpanel" aria-labelledby="actionsTab" hidden></div>
+                        <div id="spellsPanel" class="csv-panel" role="tabpanel" aria-labelledby="spellsTab" hidden></div>
+                        <div id="inventoryPanel" class="csv-panel" role="tabpanel" aria-labelledby="inventoryTab" hidden></div>
+                    </div>
+                </div>
             </section>
 
             <!-- Action Buttons -->
