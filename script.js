@@ -45,7 +45,7 @@ class CharacterSheet {
         abilityMappings.forEach(([shortName, fullName]) => {
             const input = document.querySelector(`[data-ability="${shortName}"]`) || document.querySelector(`[data-ability="${fullName}"]`);
             if (!input) return;
-            const modifier = input.parentElement.querySelector('.label');
+            const modifier = input.parentElement.querySelector('.modifier, .label');
             const score = parseInt(input.value);
             const mod = Math.floor((score - 10) / 2);
             const modSign = mod >= 0 ? '+' : '';
@@ -341,14 +341,13 @@ class CharacterSheet {
         if (!panel || rows.length < 2) return;
 
         const headers = rows[0];
-        const data = rows.slice(1).map(row => ({
-            Name: row[0] || '',
-            Description: row[1] || '',
-            Type: row[2] || '',
-            Attune: row[3] || '',
-            Cost: row[4] || '',
-            Amount: row[5] || ''
-        }));
+        const data = rows.slice(1).map(row => {
+            const item = {};
+            headers.forEach((header, index) => {
+                item[header] = row[index] || '';
+            });
+            return item;
+        });
 
         panel.innerHTML = `
             <div class="inventory-controls">
