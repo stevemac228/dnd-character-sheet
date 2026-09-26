@@ -201,6 +201,23 @@ class CharacterSheet {
             .replaceAll("'", '&#39;');
     }
 
+    insertPlainTextAtSelection(target, text) {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0) {
+            target.textContent = `${target.textContent || ''}${text}`;
+            return;
+        }
+
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const textNode = document.createTextNode(text);
+        range.insertNode(textNode);
+        range.setStartAfter(textNode);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+
     renderFeaturesPanel(rows) {
         const panel = document.getElementById('featuresPanel');
         if (!panel || !rows.length) return;
@@ -392,7 +409,7 @@ class CharacterSheet {
                 cell.addEventListener('paste', (event) => {
                     event.preventDefault();
                     const plainText = event.clipboardData?.getData('text/plain') || '';
-                    document.execCommand('insertText', false, plainText);
+                    this.insertPlainTextAtSelection(cell, plainText);
                 });
                 cell.addEventListener('input', () => {
                     const rowIndex = Number(cell.dataset.rowIndex);
