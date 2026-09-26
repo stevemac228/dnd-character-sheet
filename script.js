@@ -59,10 +59,6 @@ class CharacterSheet {
         if (!dexInput) return;
         const dexScore = parseInt(dexInput.value);
         const dexMod = Math.floor((dexScore - 10) / 2);
-        const initiativeInput = document.getElementById('initiative');
-        if (initiativeInput) {
-            initiativeInput.value = dexMod;
-        }
         const initiativeBonus = document.getElementById('initiativeBonus');
         if (initiativeBonus) {
             const initiativeBonusSign = dexMod >= 0 ? '+' : '';
