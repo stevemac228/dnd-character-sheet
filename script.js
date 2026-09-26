@@ -184,11 +184,12 @@ class CharacterSheet {
     extractTabularData(rows, hasHeader = false) {
         const columnCount = Math.max(...rows.map(row => row.length), 1);
         const firstRow = rows[0] || [];
-        const headers = hasHeader
-            ? Array.from({ length: columnCount }, (_, index) => firstRow[index] || `Column ${index + 1}`)
-            : Array.from({ length: columnCount }, (_, index) => `Column ${index + 1}`);
+        const columns = Array.from({ length: columnCount }, (_, index) => ({
+            key: `col_${index}`,
+            label: hasHeader ? (firstRow[index] || `Column ${index + 1}`) : `Column ${index + 1}`
+        }));
         const dataRows = (hasHeader ? rows.slice(1) : rows).filter(row => row.some(cell => (cell || '').trim() !== ''));
-        return { headers, dataRows };
+        return { columns, dataRows };
     }
 
     escapeHtml(value = '') {
@@ -313,15 +314,15 @@ class CharacterSheet {
         const panel = document.getElementById('actionsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows, true);
+        const { columns, dataRows } = this.extractTabularData(rows, true);
 
         panel.innerHTML = `
             <div class="csv-card">
                 <h4>Actions CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
                     <tbody>
-                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                        ${dataRows.map(row => `<tr>${columns.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
                     </tbody>
                 </table>
             </div>
@@ -332,11 +333,11 @@ class CharacterSheet {
         const panel = document.getElementById('inventoryPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows, true);
+        const { columns, dataRows } = this.extractTabularData(rows, true);
         const data = dataRows.map(row => {
             const item = {};
-            headers.forEach((header, index) => {
-                item[header] = row[index] || '';
+            columns.forEach((column, index) => {
+                item[column.key] = row[index] || '';
             });
             return item;
         });
@@ -344,7 +345,7 @@ class CharacterSheet {
             <div class="inventory-controls">
                 <input type="text" id="inventoryFilter" placeholder="Filter inventory...">
                 <select id="inventorySort">
-                    ${headers.map(header => `<option value="${this.escapeHtml(header)}">${this.escapeHtml(header)}</option>`).join('')}
+                    ${columns.map(column => `<option value="${this.escapeHtml(column.key)}">${this.escapeHtml(column.label)}</option>`).join('')}
                 </select>
                 <select id="inventoryDirection">
                     <option value="asc">Ascending</option>
@@ -368,7 +369,7 @@ class CharacterSheet {
 
             const indexedRows = data
                 .map((row, index) => ({ row, index }))
-                .filter(({ row }) => Object.values(row).join(' ').toLowerCase().includes(filter));
+                .filter(({ row }) => columns.map(column => row[column.key] || '').join(' ').toLowerCase().includes(filter));
 
             indexedRows.sort((left, right) => {
                 const leftValue = (left.row[sortBy] || '').toString().toLowerCase();
@@ -380,19 +381,24 @@ class CharacterSheet {
 
             tableWrap.innerHTML = `
                 <table class="csv-table">
-                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
                     <tbody>
-                        ${indexedRows.map(({ row, index }) => `<tr>${headers.map(header => `<td class="multiline editable-cell" contenteditable="true" data-row-index="${index}" data-header="${this.escapeHtml(header)}">${this.escapeHtml(row[header] || '')}</td>`).join('')}</tr>`).join('')}
+                        ${indexedRows.map(({ row, index }) => `<tr>${columns.map(column => `<td class="multiline editable-cell" contenteditable="true" data-row-index="${index}" data-column-key="${this.escapeHtml(column.key)}">${this.escapeHtml(row[column.key] || '')}</td>`).join('')}</tr>`).join('')}
                     </tbody>
                 </table>
             `;
 
             tableWrap.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.addEventListener('paste', (event) => {
+                    event.preventDefault();
+                    const plainText = event.clipboardData?.getData('text/plain') || '';
+                    document.execCommand('insertText', false, plainText);
+                });
                 cell.addEventListener('input', () => {
                     const rowIndex = Number(cell.dataset.rowIndex);
-                    const header = cell.dataset.header;
-                    if (Number.isNaN(rowIndex) || !header) return;
-                    data[rowIndex][header] = cell.textContent || '';
+                    const columnKey = cell.dataset.columnKey;
+                    if (Number.isNaN(rowIndex) || !columnKey) return;
+                    data[rowIndex][columnKey] = cell.textContent || '';
                 });
             });
         };
@@ -402,8 +408,8 @@ class CharacterSheet {
         directionSelect.addEventListener('change', drawTable);
         addRowButton?.addEventListener('click', () => {
             const newRow = {};
-            headers.forEach(header => {
-                newRow[header] = '';
+            columns.forEach(column => {
+                newRow[column.key] = '';
             });
             data.push(newRow);
             drawTable();
@@ -415,15 +421,15 @@ class CharacterSheet {
         const panel = document.getElementById('spellsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows, true);
+        const { columns, dataRows } = this.extractTabularData(rows, true);
 
         panel.innerHTML = `
             <div class="csv-card">
                 <h4>Spells CSV (All Rows)</h4>
                 <table class="csv-table">
-                    <thead><tr>${headers.map(header => `<th>${this.escapeHtml(header)}</th>`).join('')}</tr></thead>
+                    <thead><tr>${columns.map(column => `<th>${this.escapeHtml(column.label)}</th>`).join('')}</tr></thead>
                     <tbody>
-                        ${dataRows.map(row => `<tr>${headers.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
+                        ${dataRows.map(row => `<tr>${columns.map((_, index) => `<td class="multiline">${this.escapeHtml(row[index] || '')}</td>`).join('')}</tr>`).join('')}
                     </tbody>
                 </table>
             </div>
