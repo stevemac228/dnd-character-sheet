@@ -107,6 +107,10 @@ class CharacterSheet {
                     nextIndex = (currentIndex + 1) % buttons.length;
                 } else if (event.key === 'ArrowLeft') {
                     nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                } else if (event.key === 'ArrowDown') {
+                    nextIndex = (currentIndex + 1) % buttons.length;
+                } else if (event.key === 'ArrowUp') {
+                    nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
                 } else if (event.key === 'Home') {
                     nextIndex = 0;
                 } else if (event.key === 'End') {
@@ -175,6 +179,25 @@ class CharacterSheet {
         }
 
         return rows;
+    }
+
+    extractTabularData(rows) {
+        const columnCount = Math.max(...rows.map(row => row.length), 1);
+        const firstRow = rows[0] || [];
+        const hasHeader = firstRow.some((cell, index) => {
+            const headerValue = (cell || '').trim();
+            if (!headerValue) return false;
+            return rows.slice(1).some(row => {
+                const value = (row[index] || '').trim();
+                return value !== '' && value !== headerValue;
+            });
+        });
+
+        const headers = hasHeader
+            ? Array.from({ length: columnCount }, (_, index) => firstRow[index] || `Column ${index + 1}`)
+            : Array.from({ length: columnCount }, (_, index) => `Column ${index + 1}`);
+        const dataRows = (hasHeader ? rows.slice(1) : rows).filter(row => row.some(cell => (cell || '').trim() !== ''));
+        return { headers, dataRows };
     }
 
     escapeHtml(value = '') {
@@ -299,9 +322,7 @@ class CharacterSheet {
         const panel = document.getElementById('actionsPanel');
         if (!panel || !rows.length) return;
 
-        const columnCount = Math.max(...rows.map(row => row.length), 1);
-        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
-        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
+        const { headers, dataRows } = this.extractTabularData(rows);
 
         panel.innerHTML = `
             <div class="csv-card">
@@ -320,9 +341,7 @@ class CharacterSheet {
         const panel = document.getElementById('inventoryPanel');
         if (!panel || !rows.length) return;
 
-        const columnCount = Math.max(...rows.map(row => row.length), 1);
-        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
-        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
+        const { headers, dataRows } = this.extractTabularData(rows);
         panel.innerHTML = `
             <div class="inventory-controls">
                 <button id="inventoryAddRow" type="button" class="btn btn-secondary">Add Row</button>
@@ -350,9 +369,7 @@ class CharacterSheet {
         const panel = document.getElementById('spellsPanel');
         if (!panel || !rows.length) return;
 
-        const columnCount = Math.max(...rows.map(row => row.length), 1);
-        const headers = Array.from({ length: columnCount }, (_, index) => rows[0]?.[index] || `Column ${index + 1}`);
-        const dataRows = rows.slice(1).filter(row => row.some(cell => (cell || '').trim() !== ''));
+        const { headers, dataRows } = this.extractTabularData(rows);
 
         panel.innerHTML = `
             <div class="csv-card">
