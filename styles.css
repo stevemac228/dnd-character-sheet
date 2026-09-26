@@ -418,14 +418,28 @@ header h1 {
 }
 
 .tab-icon {
-    font-size: 1.1em;
+    font-size: 0.75em;
     width: 20px;
+    height: 20px;
+    border: 1px solid #999;
+    border-radius: 50%;
     text-align: center;
+    line-height: 18px;
+    font-weight: bold;
+    background: #f0f0f0;
+    color: #333;
+    flex-shrink: 0;
 }
 
 .csv-tab-button.active {
     background: #667eea;
     color: white;
+}
+
+.csv-tab-button.active .tab-icon {
+    border-color: #fff;
+    background: #5a6edb;
+    color: #fff;
 }
 
 .csv-content {

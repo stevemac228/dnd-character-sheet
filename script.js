@@ -313,7 +313,7 @@ class CharacterSheet {
         const panel = document.getElementById('actionsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows, false);
+        const { headers, dataRows } = this.extractTabularData(rows, true);
 
         panel.innerHTML = `
             <div class="csv-card">
@@ -415,7 +415,7 @@ class CharacterSheet {
         const panel = document.getElementById('spellsPanel');
         if (!panel || !rows.length) return;
 
-        const { headers, dataRows } = this.extractTabularData(rows, false);
+        const { headers, dataRows } = this.extractTabularData(rows, true);
 
         panel.innerHTML = `
             <div class="csv-card">
