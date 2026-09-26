@@ -33,10 +33,17 @@ class CharacterSheet {
     }
 
     calculateModifiers() {
-        const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        const abilityMappings = [
+            ['str', 'strength'],
+            ['dex', 'dexterity'],
+            ['con', 'constitution'],
+            ['int', 'intelligence'],
+            ['wis', 'wisdom'],
+            ['cha', 'charisma']
+        ];
         
-        abilities.forEach(ability => {
-            const input = document.querySelector(`[data-ability="${ability}"]`);
+        abilityMappings.forEach(([shortName, fullName]) => {
+            const input = document.querySelector(`[data-ability="${shortName}"]`) || document.querySelector(`[data-ability="${fullName}"]`);
             if (!input) return;
             const modifier = input.parentElement.querySelector('.label');
             const score = parseInt(input.value);
@@ -48,13 +55,18 @@ class CharacterSheet {
         });
 
         // Update initiative bonus
-        const dexInput = document.querySelector('[data-ability="dex"]');
+        const dexInput = document.querySelector('[data-ability="dex"]') || document.querySelector('[data-ability="dexterity"]');
         if (!dexInput) return;
         const dexScore = parseInt(dexInput.value);
         const dexMod = Math.floor((dexScore - 10) / 2);
         const initiativeInput = document.getElementById('initiative');
         if (initiativeInput) {
             initiativeInput.value = dexMod;
+        }
+        const initiativeBonus = document.getElementById('initiativeBonus');
+        if (initiativeBonus) {
+            const initiativeBonusSign = dexMod >= 0 ? '+' : '';
+            initiativeBonus.textContent = `${initiativeBonusSign}${dexMod}`;
         }
     }
 
@@ -83,22 +95,49 @@ class CharacterSheet {
 
     initializeTabs() {
         const buttons = Array.from(document.querySelectorAll('.csv-tab-button'));
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const target = button.dataset.target;
-                buttons.forEach(btn => {
-                    const isActive = btn === button;
-                    btn.classList.toggle('active', isActive);
-                    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-                });
+        const activateTab = (button) => {
+            const target = button.dataset.target;
+            buttons.forEach(btn => {
+                const isActive = btn === button;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                btn.tabIndex = isActive ? 0 : -1;
+            });
 
-                document.querySelectorAll('.csv-panel').forEach(panel => {
-                    const isActive = panel.id === target;
-                    panel.classList.toggle('active', isActive);
-                    panel.hidden = !isActive;
-                });
+            document.querySelectorAll('.csv-panel').forEach(panel => {
+                const isActive = panel.id === target;
+                panel.classList.toggle('active', isActive);
+                panel.hidden = !isActive;
+            });
+        };
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => activateTab(button));
+            button.addEventListener('keydown', (event) => {
+                const currentIndex = buttons.indexOf(button);
+                let nextIndex = currentIndex;
+
+                if (event.key === 'ArrowRight') {
+                    nextIndex = (currentIndex + 1) % buttons.length;
+                } else if (event.key === 'ArrowLeft') {
+                    nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                } else if (event.key === 'Home') {
+                    nextIndex = 0;
+                } else if (event.key === 'End') {
+                    nextIndex = buttons.length - 1;
+                } else {
+                    return;
+                }
+
+                event.preventDefault();
+                const nextButton = buttons[nextIndex];
+                nextButton.focus();
+                activateTab(nextButton);
             });
         });
+
+        const activeButton = buttons.find(button => button.classList.contains('active'));
+        if (activeButton) activateTab(activeButton);
     }
 
     async loadCsvFile(path) {
