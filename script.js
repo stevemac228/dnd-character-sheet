@@ -2,6 +2,7 @@
 class CharacterSheet {
     constructor() {
         this.characterData = {};
+        this.mobileSidebarMediaQuery = window.matchMedia('(max-width: 768px)');
         this.initializeEventListeners();
         this.calculateModifiers();
         this.initializeCsvSections();
@@ -81,6 +82,7 @@ class CharacterSheet {
 
     initializeTabs() {
         const buttons = Array.from(document.querySelectorAll('.csv-tab-button'));
+        this.initializeResponsiveSidebar();
         const activateTab = (button) => {
             const target = button.dataset.target;
             buttons.forEach(btn => {
@@ -98,7 +100,12 @@ class CharacterSheet {
         };
 
         buttons.forEach(button => {
-            button.addEventListener('click', () => activateTab(button));
+            button.addEventListener('click', () => {
+                activateTab(button);
+                if (this.mobileSidebarMediaQuery.matches) {
+                    this.setSidebarOpen(false);
+                }
+            });
             button.addEventListener('keydown', (event) => {
                 const currentIndex = buttons.indexOf(button);
                 let nextIndex = currentIndex;
@@ -128,6 +135,48 @@ class CharacterSheet {
 
         const activeButton = buttons.find(button => button.classList.contains('active'));
         if (activeButton) activateTab(activeButton);
+    }
+
+    initializeResponsiveSidebar() {
+        const toggleButton = document.getElementById('sidebarToggle');
+        const closeButton = document.getElementById('sidebarClose');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (!toggleButton || !backdrop) return;
+
+        this.setSidebarOpen = (isOpen) => {
+            document.body.classList.toggle('sidebar-open', isOpen);
+            toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            backdrop.hidden = !isOpen;
+        };
+
+        this.setSidebarOpen(false);
+
+        toggleButton.addEventListener('click', () => {
+            const isOpen = document.body.classList.contains('sidebar-open');
+            this.setSidebarOpen(!isOpen);
+        });
+
+        closeButton?.addEventListener('click', () => this.setSidebarOpen(false));
+        backdrop.addEventListener('click', () => this.setSidebarOpen(false));
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && document.body.classList.contains('sidebar-open')) {
+                this.setSidebarOpen(false);
+                toggleButton.focus();
+            }
+        });
+
+        const handleViewportChange = (event) => {
+            if (!event.matches) {
+                this.setSidebarOpen(false);
+            }
+        };
+
+        if (typeof this.mobileSidebarMediaQuery.addEventListener === 'function') {
+            this.mobileSidebarMediaQuery.addEventListener('change', handleViewportChange);
+        } else {
+            this.mobileSidebarMediaQuery.addListener(handleViewportChange);
+        }
     }
 
     async loadCsvFile(path) {

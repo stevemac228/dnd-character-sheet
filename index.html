@@ -37,8 +37,16 @@
             </section>
 
             <section class="csv-sections">
+                <div class="csv-mobile-toolbar">
+                    <button id="sidebarToggle" type="button" class="sidebar-toggle" aria-controls="csvSidebar" aria-expanded="false">
+                        <span aria-hidden="true">☰</span>
+                        <span>Pages</span>
+                    </button>
+                </div>
                 <div class="csv-layout">
-                    <nav class="csv-sidebar" role="tablist" aria-label="Character Pages">
+                    <div id="sidebarBackdrop" class="csv-sidebar-backdrop" hidden></div>
+                    <nav id="csvSidebar" class="csv-sidebar" role="tablist" aria-label="Character Pages">
+                        <button id="sidebarClose" type="button" class="sidebar-close" aria-label="Close navigation menu">✕</button>
                         <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true" tabindex="0">
                             <span class="tab-icon" aria-hidden="true">F</span>
                             <span class="tab-label">Features & Abilities</span>
