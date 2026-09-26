@@ -45,25 +45,27 @@
                 </div>
                 <div class="csv-layout">
                     <div id="sidebarBackdrop" class="csv-sidebar-backdrop" hidden></div>
-                    <nav id="csvSidebar" class="csv-sidebar" role="tablist" aria-label="Character Pages">
+                    <aside id="csvSidebar" class="csv-sidebar">
                         <button id="sidebarClose" type="button" class="sidebar-close" aria-label="Close navigation menu">✕</button>
-                        <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true" tabindex="0">
-                            <span class="tab-icon" aria-hidden="true">F</span>
-                            <span class="tab-label">Features & Abilities</span>
-                        </button>
-                        <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">A</span>
-                            <span class="tab-label">Actions</span>
-                        </button>
-                        <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">S</span>
-                            <span class="tab-label">Spells</span>
-                        </button>
-                        <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">I</span>
-                            <span class="tab-label">Inventory</span>
-                        </button>
-                    </nav>
+                        <nav class="csv-tab-list" role="tablist" aria-label="Character Pages">
+                            <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true" tabindex="0">
+                                <span class="tab-icon" aria-hidden="true">F</span>
+                                <span class="tab-label">Features & Abilities</span>
+                            </button>
+                            <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false" tabindex="-1">
+                                <span class="tab-icon" aria-hidden="true">A</span>
+                                <span class="tab-label">Actions</span>
+                            </button>
+                            <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false" tabindex="-1">
+                                <span class="tab-icon" aria-hidden="true">S</span>
+                                <span class="tab-label">Spells</span>
+                            </button>
+                            <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false" tabindex="-1">
+                                <span class="tab-icon" aria-hidden="true">I</span>
+                                <span class="tab-label">Inventory</span>
+                            </button>
+                        </nav>
+                    </aside>
 
                     <div class="csv-content">
                         <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>

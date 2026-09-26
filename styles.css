@@ -438,6 +438,12 @@ header h1 {
     gap: 8px;
 }
 
+.csv-tab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .csv-tab-button {
     width: 100%;
     padding: 10px 12px;
@@ -576,16 +582,6 @@ header h1 {
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 0;
-    }
-
-    .container {
-        border-left: 0;
-        border-right: 0;
-        min-height: 100vh;
-    }
-
     .top-info {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -636,6 +632,10 @@ header h1 {
 
     body.sidebar-open .csv-sidebar {
         transform: translateX(0);
+    }
+
+    .csv-tab-list {
+        flex: 1;
     }
 
     .sidebar-close {
