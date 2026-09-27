@@ -3,78 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D 5e Character Sheet</title>
+    <title>Moss Character Sheet</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>D&D 5e Character Sheet</h1>
-        </header>
-
-        <main>
-            <section class="top-info">
-                <div class="info-box">
-                    <label>Character Name</label>
-                    <input type="text" id="charName" value="Moss" readonly>
-                </div>
-                <div class="info-box">
-                    <label>Class</label>
-                    <input type="text" id="class" value="Druid/Ranger" readonly>
-                </div>
-                <div class="info-box">
-                    <label>Race</label>
-                    <input type="text" id="race" value="Firbolg" readonly>
-                </div>
-                <div class="info-box">
-                    <label>Level</label>
-                    <input type="number" id="level" min="1" max="20" value="1">
-                </div>
-                <div class="info-box">
-                    <label>Player</label>
-                    <input type="text" id="playerName" placeholder="Player Name">
-                </div>
-            </section>
-
-            <section class="csv-sections">
-                <div class="csv-layout">
-                    <nav class="csv-sidebar" role="tablist" aria-label="Character Pages">
-                        <button id="featuresTab" type="button" class="csv-tab-button active" data-target="featuresPanel" role="tab" aria-controls="featuresPanel" aria-selected="true" tabindex="0">
-                            <span class="tab-icon" aria-hidden="true">F</span>
-                            <span class="tab-label">Features & Abilities</span>
-                        </button>
-                        <button id="actionsTab" type="button" class="csv-tab-button" data-target="actionsPanel" role="tab" aria-controls="actionsPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">A</span>
-                            <span class="tab-label">Actions</span>
-                        </button>
-                        <button id="spellsTab" type="button" class="csv-tab-button" data-target="spellsPanel" role="tab" aria-controls="spellsPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">S</span>
-                            <span class="tab-label">Spells</span>
-                        </button>
-                        <button id="inventoryTab" type="button" class="csv-tab-button" data-target="inventoryPanel" role="tab" aria-controls="inventoryPanel" aria-selected="false" tabindex="-1">
-                            <span class="tab-icon" aria-hidden="true">I</span>
-                            <span class="tab-label">Inventory</span>
-                        </button>
-                    </nav>
-
-                    <div class="csv-content">
-                        <div id="featuresPanel" class="csv-panel active" role="tabpanel" aria-labelledby="featuresTab"></div>
-                        <div id="actionsPanel" class="csv-panel" role="tabpanel" aria-labelledby="actionsTab" hidden></div>
-                        <div id="spellsPanel" class="csv-panel" role="tabpanel" aria-labelledby="spellsTab" hidden></div>
-                        <div id="inventoryPanel" class="csv-panel" role="tabpanel" aria-labelledby="inventoryTab" hidden></div>
+    <main>
+        <div class="header-container">
+            <p> Druid/Ranger 7</p>
+            <header> Moss </header>                
+            <p> Firbolg </p>
+        </div>
+        <div class="content-wrapper">
+            <div class="cards-container">
+                <div class="cards">
+                    <div class="cards-top-row">
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>8</h2>
+                                <h2>STR</h2>
+                                <h2>-1</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>-1</p>
+                            </div>
+                            <div class="line">   </div>
+                            <div class="ability-score-content">
+                                <p>Athletics</p>
+                                <p>+0</p>
+                            </div>
+                        </div>
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>14</h2>
+                                <h2>DEX</h2>
+                                <h2>+2</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>+5</p>
+                            </div>
+                            <div class="line">   </div>
+                            <div class="ability-score-content">
+                                <p>Acrobatics</p>
+                                <p>+2</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Slight of Hand</p>
+                                <p>+2</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b>Stealth</b></p>
+                                <p><b>+5</b></p>
+                            </div>
+                        </div>
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>16</h2>
+                                <h2>CON</h2>
+                                <h2>+3</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>+3</p>
+                            </div>
+                            <div class="line">   </div>
+                        </div>
                     </div>
+                    <div class="cards-bottom-row">
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>8</h2>
+                                <h2>INT</h2>
+                                <h2>-1</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>+2</p>
+                            </div>
+                            <div class="line">   </div>
+                            <div class="ability-score-content">
+                                <p>Arcana</p>
+                                <p>-1</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>History</p>
+                                <p>-1</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b>Investigation</b></p>
+                                <p><b>+2</b></p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Religion</p>
+                                <p>-1</p>
+                            </div>
+                        </div>
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>18</h2>
+                                <h2>WIS</h2>
+                                <h2>+4</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>+7</p>
+                            </div>
+                            <div class="line">   </div>
+                            <div class="ability-score-content">
+                                <p><b>Animal Handling</b></p>
+                                <p><b>+7</b></p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b>Insight</b></p>
+                                <p><b>+7</b></p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Medicine</p>
+                                <p>+4</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b>Nature</b></p>
+                                <p><b>+7</b></p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b><u>Perception</u></b></p>
+                                <p><b>+10</b></p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p><b>Survival</b></p>
+                                <p><b>+7</b></p>
+                            </div>
+                        </div>
+                        <div class="card ability-score">
+                            <div class="ability-score-header">
+                                <h2>12</h2>
+                                <h2>CHA</h2>
+                                <h2>+1</h2>
+                            </div>
+                            <div class="saves">
+                                <p>Save</p>
+                                <p>+1</p>
+                            </div>
+                            <div class="line">   </div>
+                            <div class="ability-score-content">
+                                <p>Deception</p>
+                                <p>+0</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Intimidation</p>
+                                <p>+0</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Performance</p>
+                                <p>+0</p>
+                            </div>
+                            <div class="ability-score-content">
+                                <p>Persuasion</p>
+                                <p>+0</p>
+                            </div>
+                        </div>
+                    </div>            
                 </div>
-            </section>
+                <div class="proficiencies">
+                        <h2>Proficiencies</h2>
+                        <p>Weapons: Simple, Martial</p>
+                        <p>Armor: Light, Medium and Shields</p>
+                        <p>Tools: Cooks Tools, Herbalism Kit</p>
+                        <p>Languages: Common, Druidic,Elvish, Sylvan</p>
+                        <p>
+                            Can talk TO but not hear back from
+                            any Beasts, Plants or Vegetation.
+                            + ADV on all CHA Checks w/ them
+                        </p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-row">
+                    <H2>Health</H2>
+                    <input type="number" id="health" value="45">
+                    <p>/</p>
+                    <input type="number" id="health" value="59">
+                </div>
+                <div class="stat-row">
+                    <H2>AC</H2>
+                    <h3>19</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Initiative</H2>
+                    <h3>+2</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Profiency</H2>
+                    <h3>+3</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Speed</H2>
+                    <h3>30(climb & swim)</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Hit Die</H2>
+                    <input type="number" id="health" value="0">
+                    <h3>/5d10</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Spell Save</H2>
+                    <h3>15</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Spell Attack</H2>
+                    <h3>+7</h3>
+                </div>
+            </div>
+            <div class="spells">
+                <div class="stat-row">
+                    <H2>Health</H2>
+                    <input type="number" id="health" value="45">
+                    <p>/</p>
+                    <input type="number" id="health" value="59">
+                </div>
+                <div class="stat-row">
+                    <H2>AC</H2>
+                    <h3>19</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Initiative</H2>
+                    <h3>+2</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Profiency</H2>
+                    <h3>+3</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Speed</H2>
+                    <h3>30(climb & swim)</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Hit Die</H2>
+                    <input type="number" id="health" value="0">
+                    <h3>/5d10</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Spell Save</H2>
+                    <h3>15</h3>
+                </div>
+                <div class="stat-row">
+                    <H2>Spell Attack</H2>
+                    <h3>+7</h3>
+                </div>
 
-            <!-- Action Buttons -->
-            <section class="actions">
-                <button id="saveBtn" class="btn btn-primary">💾 Save</button>
-                <button id="loadBtn" class="btn btn-secondary">📂 Load</button>
-                <button id="exportBtn" class="btn btn-secondary">📥 Export</button>
-                <button id="resetBtn" class="btn btn-danger">🔄 Reset</button>
-            </section>
-        </main>
-    </div>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

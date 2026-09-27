@@ -1,567 +1,164 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Arial', sans-serif;
     background: #f0f0f0;
     color: #333;
-    padding: 15px;
 }
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border: 2px solid #333;
+.header-container {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.class-race p{
+    margin:  1px;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-}
-
-header h1 {
-    font-size: 1.8em;
+    font-size: 4em;
     font-weight: bold;
+    margin-right: 0;
 }
 
-/* Top Info Section */
-.top-info {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #999;
-    padding: 10px;
-}
-
-.info-box {
-    display: flex;
-    flex-direction: column;
-}
-
-.info-box label {
-    font-weight: bold;
-    font-size: 0.8em;
-    margin-bottom: 3px;
-}
-
-.info-box input,
-.info-box select {
-    padding: 5px;
-    border: 1px solid #999;
-    font-size: 0.9em;
-}
-
-/* Main Sheet Grid - 3 columns */
-.sheet-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr 1.5fr;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-/* Left Column: Ability Scores */
-.ability-scores {
-    border: 1px solid #999;
-    padding: 10px;
-    background: #f9f9f9;
-}
-
-.ability-scores h3 {
-    font-size: 0.9em;
-    font-weight: bold;
-    border-bottom: 1px solid #999;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-.ability-pair {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.ability-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid #ddd;
-    background: white;
-    text-align: center;
-}
-
-.ability-col .label {
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-bottom: 3px;
-}
-
-.ability-col .btn-ability {
-    font-size: 0.7em;
-    padding: 3px 5px;
-    background: #e8e8e8;
-    border: 1px solid #999;
-    cursor: pointer;
-    margin-bottom: 3px;
-    font-weight: bold;
-}
-
-.ability-col input {
-    width: 100%;
-    padding: 4px;
-    border: 1px solid #999;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1em;
-    margin-bottom: 2px;
-}
-
-.ability-col .ability-name {
-    font-size: 0.8em;
-    font-weight: bold;
-}
-
-/* Skills in left column */
-.skills-two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-.skill-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    border: 1px solid #ddd;
-    font-size: 0.8em;
-}
-
-.skill-item span {
-    flex: 1;
-}
-
-.skill-item input {
-    width: 40px;
-    padding: 2px;
-    border: 1px solid #999;
-    text-align: center;
-}
-
-/* Middle Column: Spells & Combat */
-.middle-column {
-    border: 1px solid #999;
-    padding: 10px;
-    background: #f9f9f9;
-}
-
-.middle-column h3 {
-    font-size: 0.9em;
-    font-weight: bold;
-    border-bottom: 1px solid #999;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-.spell-header {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    font-size: 0.75em;
-}
-
-.spell-name {
-    font-weight: bold;
-}
-
-.spell-mod {
-    text-align: center;
-    font-weight: bold;
-}
-
-.combat-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.stat {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border: 1px solid #ddd;
-    background: white;
-}
-
-.stat label {
-    font-size: 0.75em;
-    font-weight: bold;
-    margin-bottom: 3px;
-}
-
-.stat input,
-.stat .hp-display {
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1em;
-}
-
-.stat-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+.class-race {
+    font-size: 12px;
+    width: fit-content;
+    height: fit-content;
     margin-top: 10px;
 }
 
-/* Right Column: Features & Spells */
-.right-column {
-    border: 1px solid #999;
-    padding: 10px;
-    background: #f9f9f9;
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.cards-container {
     display: flex;
     flex-direction: column;
+    margin:0;
+    gap:10px;
 }
 
-.right-column h3 {
-    font-size: 0.9em;
-    font-weight: bold;
-    border-bottom: 1px solid #999;
-    padding-bottom: 5px;
-    margin-bottom: 8px;
-}
-
-.features-list {
+.proficiencies {
     flex: 1;
-    overflow-y: auto;
-    margin-bottom: 15px;
-    font-size: 0.8em;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.proficiencies h2 {
+    margin: 0;
 }
 
-.feature {
-    margin-bottom: 8px;
-    padding: 5px;
-    border: 1px solid #ddd;
-}
-
-.feature label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 2px;
-}
-
-.feature span {
-    font-size: 0.75em;
-    line-height: 1.2;
-}
-
-.spells-box {
+.stats {
     flex: 1;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spells {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cards {
     display: flex;
     flex-direction: column;
+    gap:10px;
 }
 
-.spells-box textarea {
-    flex: 1;
-    padding: 5px;
-    border: 1px solid #999;
-    font-size: 0.75em;
-    font-family: monospace;
-    resize: none;
-}
-
-/* Bottom Section */
-.bottom-section {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.proficiencies,
-.equipment {
-    border: 1px solid #999;
-    padding: 10px;
-    background: #f9f9f9;
-}
-
-.proficiencies h3,
-.equipment h3 {
-    font-size: 0.9em;
-    font-weight: bold;
-    border-bottom: 1px solid #999;
-    padding-bottom: 5px;
-    margin-bottom: 8px;
-}
-
-.prof-list,
-.equipment-list {
-    font-size: 0.8em;
-}
-
-.prof-item,
-.equip-item {
+.cards-top-row, .cards-bottom-row {
     display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ability-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1px;
+}
+
+.ability-score-header {
+    font-weight: bold;
+    font-size: 10px;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    padding: 3px 5px;
-    border-bottom: 1px solid #ddd;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0;
 }
 
-.value {
-    font-weight: bold;
-    text-align: right;
+.ability-score-header h2 {
+    margin: 5px;
 }
 
-.ac-note {
-    font-size: 0.75em;
-    margin-top: 5px;
-    padding: 5px;
-    background: white;
-    border: 1px solid #ddd;
-    text-align: center;
+.ability-score p {
+    font-size:12px;
+    margin: 6px;
 }
 
-/* Action Buttons */
-.actions {
+.ability-score-content {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: 1px solid #999;
-    background: #e8e8e8;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: all 0.2s;
-}
-
-.btn:hover {
-    background: #d8d8d8;
-}
-
-.btn-primary {
-    background: #667eea;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #764ba2;
-}
-
-.btn-secondary {
-    background: #d0d0d0;
-}
-
-.btn-secondary:hover {
-    background: #c0c0c0;
-}
-
-.btn-danger {
-    background: #ff6b6b;
-    color: white;
-}
-
-.btn-danger:hover {
-    background: #ff5252;
-}
-
-.csv-sections {
-    border: 1px solid #999;
-    background: #f9f9f9;
-    margin-bottom: 20px;
-}
-
-.csv-layout {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    min-height: 640px;
-}
-
-.csv-sidebar {
-    border-right: 1px solid #999;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.csv-tab-button {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #999;
-    background: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9em;
-    text-align: left;
-    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 4px;
+    padding-right: 4px;
+    height:fit-content;
     align-items: center;
-    gap: 8px;
 }
 
-.tab-icon {
-    font-size: 0.75em;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #999;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 18px;
-    font-weight: bold;
-    background: #f0f0f0;
-    color: #333;
-    flex-shrink: 0;
+.line {
+    border-top: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 1px 0;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
-.csv-tab-button.active {
-    background: #667eea;
-    color: white;
-}
-
-.csv-tab-button.active .tab-icon {
-    border-color: #fff;
-    background: #5a6edb;
-    color: #fff;
-}
-
-.csv-content {
-    padding: 12px;
-}
-
-.csv-panel {
-    min-height: 100%;
-}
-
-.csv-card {
-    border: 1px solid #ddd;
-    background: white;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-.csv-card h4 {
-    margin-bottom: 8px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    font-size: 0.9em;
-}
-
-.csv-grid-two {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.csv-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82em;
-}
-
-.csv-table th,
-.csv-table td {
-    border: 1px solid #ddd;
-    padding: 6px;
-    text-align: left;
-    vertical-align: top;
-}
-
-.csv-table th {
-    background: #f0f0f0;
-}
-
-.multiline {
-    white-space: pre-line;
-}
-
-.inventory-controls {
+.saves {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.saves p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
-}
-
-.inventory-controls input,
-.inventory-controls select {
-    padding: 6px;
-    border: 1px solid #999;
-}
-
-.spell-group {
-    margin-bottom: 14px;
-}
-
-.spell-group h4 {
-    margin-bottom: 6px;
-}
-
-.top-info input[readonly] {
-    background: #ececec;
-    font-weight: bold;
-    cursor: not-allowed;
-}
-
-.editable-cell {
-    min-width: 140px;
-    background: #fffef4;
-}
-
-.editable-cell:focus {
-    outline: 2px solid #667eea;
-    outline-offset: -2px;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .top-info {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .csv-layout {
-        grid-template-columns: 200px 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .top-info {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .csv-grid-two {
-        grid-template-columns: 1fr;
-    }
-
-    .csv-layout {
-        grid-template-columns: 1fr;
-        min-height: 0;
-    }
-
-    .csv-sidebar {
-        border-right: 0;
-        border-bottom: 1px solid #999;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .csv-tab-button {
-        flex: 1 1 calc(50% - 8px);
-    }
 }
