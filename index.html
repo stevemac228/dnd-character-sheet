@@ -7,27 +7,67 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main>
-        <div class="header-container">
-            <p> Druid/Ranger 7</p>
-            <header> Moss </header>                
-            <p> Firbolg </p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active" title="Character Sheet">📋</a>
+                <a href="spells.html" class="nav-link" title="Spells">✨</a>
+            </div>
+            <div class="nav-header">
+                <p>Druid/Ranger 7</p>
+                <p class="title">Moss</p>                
+                <p>Firbolg</p>
+            </div>
+            <div class="nav-stats">
+                <div class="nav-hp">
+                    <p class="nav-hp-label">HP</p>
+                    <p class="nav-hp-value"><span id="nav-health-current">45</span>/<span id="nav-health-max">59</span></p>
+                </div>
+                <div class="nav-stat-boxes">
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-ac">19</p>
+                        <p class="nav-stat-label">AC</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-init">+2</p>
+                        <p class="nav-stat-label">Init</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-prof">+3</p>
+                        <p class="nav-stat-label">Prof</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">30</p>
+                        <p class="nav-stat-label">Speed(s&c)</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">15</p>
+                        <p class="nav-stat-label">Sp save</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">+7</p>
+                        <p class="nav-stat-label">Sp atk</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </nav>
+    <main>
         <div class="content-wrapper">
             <div class="cards-container">
                 <div class="cards">
                     <div class="cards-top-row">
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>8</h2>
-                                <h2>STR</h2>
-                                <h2>-1</h2>
+                                <p>8</p>
+                                <p>STR</p>
+                                <p>-1</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>-1</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                             <div class="ability-score-content">
                                 <p>Athletics</p>
                                 <p>+0</p>
@@ -35,15 +75,15 @@
                         </div>
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>14</h2>
-                                <h2>DEX</h2>
-                                <h2>+2</h2>
+                                <p>14</p>
+                                <p>DEX</p>
+                                <p>+2</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>+5</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                             <div class="ability-score-content">
                                 <p>Acrobatics</p>
                                 <p>+2</p>
@@ -59,29 +99,29 @@
                         </div>
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>16</h2>
-                                <h2>CON</h2>
-                                <h2>+3</h2>
+                                <p>16</p>
+                                <p>CON</p>
+                                <p>+3</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>+3</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                         </div>
                     </div>
                     <div class="cards-bottom-row">
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>8</h2>
-                                <h2>INT</h2>
-                                <h2>-1</h2>
+                                <p>8</p>
+                                <p>INT</p>
+                                <p>-1</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>+2</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                             <div class="ability-score-content">
                                 <p>Arcana</p>
                                 <p>-1</p>
@@ -101,15 +141,15 @@
                         </div>
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>18</h2>
-                                <h2>WIS</h2>
-                                <h2>+4</h2>
+                                <p>18</p>
+                                <p>WIS</p>
+                                <p>+4</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>+7</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                             <div class="ability-score-content">
                                 <p><b>Animal Handling</b></p>
                                 <p><b>+7</b></p>
@@ -137,15 +177,15 @@
                         </div>
                         <div class="card ability-score">
                             <div class="ability-score-header">
-                                <h2>12</h2>
-                                <h2>CHA</h2>
-                                <h2>+1</h2>
+                                <p>12</p>
+                                <p>CHA</p>
+                                <p>+1</p>
                             </div>
                             <div class="saves">
                                 <p>Save</p>
                                 <p>+1</p>
                             </div>
-                            <div class="line">   </div>
+                            <div class="line"></div>
                             <div class="ability-score-content">
                                 <p>Deception</p>
                                 <p>+0</p>
@@ -166,92 +206,101 @@
                     </div>            
                 </div>
                 <div class="proficiencies">
-                        <h2>Proficiencies</h2>
-                        <p>Weapons: Simple, Martial</p>
-                        <p>Armor: Light, Medium and Shields</p>
-                        <p>Tools: Cooks Tools, Herbalism Kit</p>
-                        <p>Languages: Common, Druidic,Elvish, Sylvan</p>
-                        <p>
-                            Can talk TO but not hear back from
-                            any Beasts, Plants or Vegetation.
-                            + ADV on all CHA Checks w/ them
-                        </p>
+                    <p class="section-title">Proficiencies</p>
+                    <p>Weapons: Simple, Martial</p>
+                    <p>Armor: Light, Medium and Shields</p>
+                    <p>Tools: Cooks Tools, Herbalism Kit</p>
+                    <p>Languages: Common, Druidic, Elvish, Sylvan</p>
+                    <p>Can talk TO but not hear back from any Beasts, Plants or Vegetation. + ADV on all CHA Checks w/ them</p>
                 </div>
             </div>
             <div class="stats">
                 <div class="stat-row">
-                    <H2>Health</H2>
-                    <input type="number" id="health" value="45">
+                    <p>Health</p>
+                    <div class="number-input">
+                        <button class="minus-btn" onclick="decreaseHealth('health-current')">−</button>
+                        <input type="number" id="health-current" value="45">
+                        <button class="plus-btn" onclick="increaseHealth('health-current')">+</button>
+                    </div>
                     <p>/</p>
-                    <input type="number" id="health" value="59">
+                    <input type="number" id="health-max" value="59">
                 </div>
                 <div class="stat-row">
-                    <H2>AC</H2>
-                    <h3>19</h3>
+                    <p>Hit Die</p>
+                    <div class="number-input">
+                        <button class="minus-btn" onclick="decreaseValue('hit-die')">−</button>
+                        <input type="number" id="hit-die" value="0">
+                        <button class="plus-btn" onclick="increaseValue('hit-die')">+</button>
+                    </div>
+                    <p>/5d10</p>
                 </div>
-                <div class="stat-row">
-                    <H2>Initiative</H2>
-                    <h3>+2</h3>
+                <div class="stat-row-horizontal">
+                    <div class="stat-box">
+                        <p class="stat-value">19</p>
+                        <p class="stat-label">AC</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-value">+2</p>
+                        <p class="stat-label">Init</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-value">+3</p>
+                        <p class="stat-label">Prof</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-value">30</p>
+                        <p class="stat-label">Speed(s&c)</p>
+                    </div>
                 </div>
-                <div class="stat-row">
-                    <H2>Profiency</H2>
-                    <h3>+3</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Speed</H2>
-                    <h3>30(climb & swim)</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Hit Die</H2>
-                    <input type="number" id="health" value="0">
-                    <h3>/5d10</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Spell Save</H2>
-                    <h3>15</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Spell Attack</H2>
-                    <h3>+7</h3>
+                <div class="stat-row-horizontal">
+                    <div class="stat-box">
+                        <p class="stat-value">15</p>
+                        <p class="stat-label">Spell Save</p>
+                    </div>
+                    <div class="stat-box">
+                        <p class="stat-value">+7</p>
+                        <p class="stat-label">Spell Attack</p>
+                    </div>
                 </div>
             </div>
-            <div class="spells">
-                <div class="stat-row">
-                    <H2>Health</H2>
-                    <input type="number" id="health" value="45">
-                    <p>/</p>
-                    <input type="number" id="health" value="59">
-                </div>
-                <div class="stat-row">
-                    <H2>AC</H2>
-                    <h3>19</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Initiative</H2>
-                    <h3>+2</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Profiency</H2>
-                    <h3>+3</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Speed</H2>
-                    <h3>30(climb & swim)</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Hit Die</H2>
-                    <input type="number" id="health" value="0">
-                    <h3>/5d10</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Spell Save</H2>
-                    <h3>15</h3>
-                </div>
-                <div class="stat-row">
-                    <H2>Spell Attack</H2>
-                    <h3>+7</h3>
-                </div>
-
+            <div class="features">
+                <table>
+                    <tr>
+                        <td><p class="feature-name">Druidic</p></td>
+                        <td>You can use Druidic to leave hidden message, other people can find it w/ DC15 Investigation but cant read unless they know druidic</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Wild Resurgence</p></td>
+                        <td>You can expend wild shape to gain a lvl 1 spell slot</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Wild Resurgence</p></td>
+                        <td>x/1/LR You can expend a spell slot to regain a wild shape</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Hunters Mark</p></td>
+                        <td>x/3/LR Use the spell w/o Spell Slot</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Detect Magic</p></td>
+                        <td>x/1/LR Use the spell w/o Spell Slot</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Disguise Self</p></td>
+                        <td>x/1/LR Use the spell w/o Spell Slot</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Hidden Step</p></td>
+                        <td>x/(Prof Bonus)/LR BA Turn invis until next turn</td>
+                    </tr>
+                    <tr>
+                        <td><p class="feature-name">Wild Shape</p></td>
+                        <td>x/3 lr You can transform into a beast you have seen before. You can stay in beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can use this feature twice. You regain expended uses when you finish a short or long rest.</td>
+                    <tr>
+                        <td><p class="feature-name">Fungal Infestation</p></td>
+                        <td>3/4 lr (reaction 1hp zombie for 1hr)</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </main>

@@ -1,9 +1,124 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: #f0f0f0;
-    color: #333;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
 }
 
+/* Navbar */
+.navbar {
+    background-color: #0f0f0f;
+    border-bottom: 2px solid #444;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 10px;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+    margin: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.nav-header {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-header p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.nav-header .title {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav-spacer {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.nav-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.nav-hp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-hp-label {
+    font-size: 10px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.nav-hp-value {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    color: #e0e0e0;
+}
+
+.nav-stat-boxes {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.nav-stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-stat-value {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    color: #4a9eff;
+}
+
+.nav-stat-label {
+    font-size: 8px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #888;
+}
+
+/* Header */
 .header-container {
     display: flex;
     flex-direction: row;
@@ -13,23 +128,26 @@ body {
     gap: 40px;
 }
 
-.class-race p{
-    margin:  1px;
-}
-
-header {
+.header-container .title {
     font-size: 4em;
     font-weight: bold;
-    margin-right: 0;
+}
+
+.header-container p {
+    margin: 0;
 }
 
 .class-race {
     font-size: 12px;
     width: fit-content;
     height: fit-content;
-    margin-top: 10px;
 }
 
+.class-race p {
+    margin: 0;
+}
+
+/* Content Layout */
 .content-wrapper {
     display: flex;
     flex-direction: row;
@@ -39,61 +157,31 @@ header {
 .cards-container {
     display: flex;
     flex-direction: column;
-    margin:0;
-    gap:10px;
-}
-
-.proficiencies {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-top: 0;
-    padding: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.proficiencies h2 {
     margin: 0;
+    gap: 10px;
+    width: 400px;
 }
 
-.stats {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-top: 0;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.spells {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-top: 0;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
+/* Cards */
 .cards {
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
 }
 
-.cards-top-row, .cards-bottom-row {
+.cards-top-row,
+.cards-bottom-row {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
 .card {
-    background: #fff;
-    border: 1px solid #ccc;
+    background: #2a2a2a;
+    border: 1px solid #444;
     border-radius: 8px;
     flex: 1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .ability-score {
@@ -109,36 +197,33 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0 8px;
     margin: 0;
+    padding:5px 5px 3px 5px;
 }
 
-.ability-score-header h2 {
+.ability-score-header p {
     margin: 5px;
 }
 
 .ability-score p {
-    font-size:12px;
-    margin: 6px;
+    font-size: 12px;
+    margin: 0;
 }
 
 .ability-score-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 4px;
-    padding-right: 4px;
-    height:fit-content;
+    padding: 0 4px;
+    height: fit-content;
     align-items: center;
 }
 
 .line {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #444;
     border-radius: 5px;
-    margin: 1px 0;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 1px 10%;
 }
 
 .saves {
@@ -146,19 +231,221 @@ header {
     flex-direction: row;
     justify-content: center;
     gap: 3px;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-
-.saves p {
+    padding: 0 4px;
     font-size: 12px;
     margin: 0;
 }
 
+.saves p {
+    margin: 0;
+    font-size: 12px;
+}
+
+/* Containers */
+.proficiencies,
+.stats,
+.features {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.proficiencies {
+    flex: 1;
+}
+
+.proficiencies .section-title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.proficiencies p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.stats {
+    flex: none;
+    width: 250px;
+    padding: 20px;
+}
+
+.features {
+    flex: 1;
+}
+
+/* Tables */
+.features table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.features th,
+.features td {
+    text-align: left;
+    border-bottom: 1px solid #444;
+    margin: 0;
+}
+
+.features th {
+    font-weight: bold;
+    background-color: #1a1a1a;
+}
+
+.features td:last-child {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.features h4 {
+    margin: 0;
+}
+
+.feature-name {
+    margin: 5px;
+    font-weight: bold;
+}
+
+/* Stats */
 .stat-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.stat-row p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.stat-row p:first-child {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.stat-row-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    gap: 10px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #4a9eff;
+}
+
+.stat-label {
+    font-size: 10px;
+    margin: 3px 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stat-label-mini {
+    font-size: 8px;
+    margin: 2px 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Inputs */
+input[type="number"] {
+    width: 20px;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 2px solid #555;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    background-color: transparent;
+    color: #e0e0e0;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-bottom-color: #4a9eff;
+    background-color: rgba(74, 158, 255, 0.1);
+}
+
+input[type="number"]:hover:not(:focus) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#health-current {
+    width: 25px;
+}
+
+/* Number Input */
+.number-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.number-input input[type="number"] {
+    width: 50px;
+    padding: 6px 28px;
+    text-align: center;
+}
+
+.minus-btn,
+.plus-btn {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: #e0e0e0;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    position: absolute;
+}
+
+.minus-btn {
+    left: 4px;
+}
+
+.plus-btn {
+    right: 4px;
+}
+
+.minus-btn:hover,
+.plus-btn:hover {
+    background-color: rgba(74, 158, 255, 0.2);
+    color: #4a9eff;
+}
+
+.minus-btn:active,
+.plus-btn:active {
+    background-color: rgba(74, 158, 255, 0.4);
 }

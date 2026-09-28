@@ -672,3 +672,39 @@ class CharacterSheet {
 document.addEventListener('DOMContentLoaded', () => {
     new CharacterSheet();
 });
+
+function increaseHealth(id) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value) + 1;
+    updateNavbarHealth();
+}
+
+function decreaseHealth(id) {
+    const input = document.getElementById(id);
+    if (parseInt(input.value) > 0) {
+        input.value = parseInt(input.value) - 1;
+    }
+    updateNavbarHealth();
+}
+
+function increaseValue(id) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value) + 1;
+}
+
+function decreaseValue(id) {
+    const input = document.getElementById(id);
+    if (parseInt(input.value) > 0) {
+        input.value = parseInt(input.value) - 1;
+    }
+}
+
+function updateNavbarHealth() {
+    const current = document.getElementById('health-current').value;
+    const max = document.getElementById('health-max').value;
+    document.getElementById('nav-health-current').textContent = current;
+    document.getElementById('nav-health-max').textContent = max;
+}
+
+// Initialize navbar on page load
+document.addEventListener('DOMContentLoaded', updateNavbarHealth);
