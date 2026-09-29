@@ -1,152 +1,3 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: #1a1a1a;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #0f0f0f;
-    border-bottom: 2px solid #444;
-    padding: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    margin-bottom: 10px;
-}
-
-.nav-container {
-    display: flex;
-    flex-direction: row;
-    padding: 10px 20px;
-    margin: 0;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-links {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    flex: 0 0 auto;
-}
-
-.nav-header {
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nav-header p {
-    margin: 0;
-    font-size: 12px;
-}
-
-.nav-header .title {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 0;
-}
-
-.nav-spacer {
-    flex: 0 0 auto;
-    width: auto;
-}
-
-.nav-stats {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    flex: 0 0 auto;
-}
-
-.nav-hp {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-}
-
-.nav-hp-label {
-    font-size: 10px;
-    margin: 0;
-    text-transform: uppercase;
-    color: #888;
-}
-
-.nav-hp-value {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    color: #e0e0e0;
-}
-
-.nav-stat-boxes {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-}
-
-.nav-stat-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-}
-
-.nav-stat-value {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    color: #4a9eff;
-}
-
-.nav-stat-label {
-    font-size: 8px;
-    margin: 0;
-    text-transform: uppercase;
-    color: #888;
-}
-
-/* Header */
-.header-container {
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-}
-
-.header-container .title {
-    font-size: 4em;
-    font-weight: bold;
-}
-
-.header-container p {
-    margin: 0;
-}
-
-.class-race {
-    font-size: 12px;
-    width: fit-content;
-    height: fit-content;
-}
-
-.class-race p {
-    margin: 0;
-}
-
 /* Content Layout */
 .content-wrapper {
     display: flex;
@@ -197,9 +48,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 8px;
+    padding: 5px 5px 3px 5px;
     margin: 0;
-    padding:5px 5px 3px 5px;
 }
 
 .ability-score-header p {
@@ -299,10 +149,6 @@ body {
     overflow-wrap: break-word;
 }
 
-.features h4 {
-    margin: 0;
-}
-
 .feature-name {
     margin: 5px;
     font-weight: bold;
@@ -359,50 +205,6 @@ body {
     text-transform: uppercase;
 }
 
-.stat-label-mini {
-    font-size: 8px;
-    margin: 2px 0 0 0;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-/* Inputs */
-input[type="number"] {
-    width: 20px;
-    padding: 8px 12px;
-    border: none;
-    border-bottom: 2px solid #555;
-    font-size: 16px;
-    font-family: 'Arial', sans-serif;
-    background-color: transparent;
-    color: #e0e0e0;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-input[type="number"]:focus {
-    outline: none;
-    border-bottom-color: #4a9eff;
-    background-color: rgba(74, 158, 255, 0.1);
-}
-
-input[type="number"]:hover:not(:focus) {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
-#health-current {
-    width: 25px;
-}
-
 /* Number Input */
 .number-input {
     display: flex;
@@ -414,6 +216,10 @@ input[type="number"] {
     width: 50px;
     padding: 6px 28px;
     text-align: center;
+}
+
+#health-current {
+    width: 25px;
 }
 
 .minus-btn,
@@ -448,4 +254,8 @@ input[type="number"] {
 .minus-btn:active,
 .plus-btn:active {
     background-color: rgba(74, 158, 255, 0.4);
+}
+
+input[type="number"] {
+    width:20px;
 }

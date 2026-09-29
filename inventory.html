@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moss Inventory</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/inventory.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" title="Character Sheet">📋</a>
+                <a href="spells.html" class="nav-link" title="Spells">✨</a>
+                <a href="actions.html" class="nav-link" title="Actions">⚔️</a>
+                <a href="inventory.html" class="nav-link active" title="Inventory">🎒</a>
+            </div>
+            <div class="nav-header">
+                <p>Druid/Ranger 7</p>
+                <p class="title">Moss</p>                
+                <p>Firbolg</p>
+            </div>
+            <div class="nav-stats">
+                <div class="nav-hp">
+                    <p class="nav-hp-label">HP</p>
+                    <p class="nav-hp-value"><span id="nav-health-current">45</span>/<span id="nav-health-max">59</span></p>
+                </div>
+                <div class="nav-stat-boxes">
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-ac">19</p>
+                        <p class="nav-stat-label">AC</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-init">+2</p>
+                        <p class="nav-stat-label">Init</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value" id="nav-prof">+3</p>
+                        <p class="nav-stat-label">Prof</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">30</p>
+                        <p class="nav-stat-label">Speed(s&c)</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">15</p>
+                        <p class="nav-stat-label">Sp save</p>
+                    </div>
+                    <div class="nav-stat-box">
+                        <p class="nav-stat-value">+7</p>
+                        <p class="nav-stat-label">Sp atk</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="inventory-container">
+            <div class="inventory-stats">
+                <div class="currency-inputs">
+                    <div class="currency-input-row">
+                        <div class="currency-input-group">
+                            <label for="cp-input">Copper</label>
+                            <input type="number" id="cp-input" class="currency-input" data-currency="cp" value="0" min="0" max="9999" step="1">
+                            <span class="currency-conversion">0.01 gp</span>
+                        </div>
+                        <div class="currency-arrows">
+                            <button class="currency-arrow right" data-from="cp" data-to="sp" title="Convert to Silver">→</button>
+                            <button class="currency-arrow left" data-from="sp" data-to="cp" title="Convert to Copper">←</button>
+                        </div>
+                        
+                        <div class="currency-input-group">
+                            <label for="sp-input">Silver</label>
+                            <input type="number" id="sp-input" class="currency-input" data-currency="sp" value="0" min="0" max="9999" step="1">
+                            <span class="currency-conversion">0.1 gp</span>
+                        </div>
+                        <div class="currency-arrows">
+                            <button class="currency-arrow right" data-from="sp" data-to="gp" title="Convert to Gold">→</button>
+                            <button class="currency-arrow left" data-from="gp" data-to="sp" title="Convert to Silver">←</button>
+                        </div>
+                        
+                        <div class="currency-input-group">
+                            <label for="gp-input">Gold</label>
+                            <input type="number" id="gp-input" class="currency-input" data-currency="gp" value="0" min="0" max="9999" step="1">
+                            <span class="currency-conversion">1 gp</span>
+                        </div>
+                        <div class="currency-arrows">
+                            <button class="currency-arrow right" data-from="gp" data-to="pp" title="Convert to Platinum">→</button>
+                            <button class="currency-arrow left" data-from="pp" data-to="gp" title="Convert to Gold">←</button>
+                        </div>
+                        
+                        <div class="currency-input-group">
+                            <label for="pp-input">Platinum</label>
+                            <input type="number" id="pp-input" class="currency-input" data-currency="pp" value="0" min="0" max="9999" step="1">
+                            <span class="currency-conversion">10 gp</span>
+                        </div>
+
+                        <div class="currency-input-group-total">
+                            <span class="total-label">Total:</span>
+                            <span id="total-gold" class="total-amount">0 gp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="inventory-table" class="inventory-table">
+                <thead>
+                    <tr>
+                        <th class="drag-col"></th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th class="action-col"></th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-body">
+                </tbody>
+            </table>
+            <button id="add-row-btn" class="add-row-btn">+ Add Item</button>
+        </div>
+    </main>
+
+    <script src="js/inventory.js"></script>
+</body>
+</html>
